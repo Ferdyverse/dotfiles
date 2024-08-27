@@ -1,0 +1,26 @@
+" Tun on syntax highlightning
+syntax enable
+
+" Numer of visual spaces per TAB
+set tabstop=4
+
+" Number of spaces in tab when editing
+set softtabstop=4
+
+" For plug-ins to load correctly.
+filetype plugin indent on
+
+" Turn off modelines
+set modelines=0
+
+" Encoding
+set encoding=utf-8
+
+" No Numbers
+set nonumber
+
+" No List
+set nolist
+
+" Color theme
+color elflord
