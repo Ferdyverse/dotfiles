@@ -29,7 +29,7 @@ if which eza >/dev/null; then
 	alias ls="eza --icons -a --group-directories-first"	
 fi
 
-if [[ $ID == fedora ]]; then
+if [[ \$ID == fedora ]]; then
 	alias apt="dnf"
 else
 	if which nala >/dev/null; then
@@ -38,7 +38,7 @@ else
 fi
 
 # General linux
-if [[ $OSTYPE == linux* ]]; then
+if [[ \$OSTYPE == linux* ]]; then
 	
 	# cat to batcat
 	if which bat >/dev/null; then
@@ -49,23 +49,23 @@ if [[ $OSTYPE == linux* ]]; then
 	if uname -r | grep -q "microsoft"; then
 		alias src="cd /mnt/c/src/"
 	else
-		alias src="cd $HOME/src"
+		alias src="cd \$HOME/src"
 	fi
 
 	# Update dotfiles
-	alias dotfiles="cd $HOME/.dotfiles/; ./bootstrap.sh --run-all; cd -"
+	alias dotfiles="cd \$HOME/.dotfiles/; ./bootstrap.sh --run-all; cd -"
 
 	# Do not use nano
 	alias nano="vim"
 	alias nani="/usr/bin/nano"
 
 	# Backup script
-	alias backup="$HOME/.local/bin/backup_home"
+	alias backup="\$HOME/.local/bin/backup_home"
 
 fi
 
 # macOS aliasses
-if [[ $OSTYPE == darwin* ]]; then
+if [[ \$OSTYPE == darwin* ]]; then
 	
 	# cat to batcat
 	if which bat >/dev/null; then
@@ -73,10 +73,10 @@ if [[ $OSTYPE == darwin* ]]; then
 	fi
 	
 	# Tailing test with batcat
-	alias btail="tail -f $@ | bat --paging=never -l log"
+	alias btail="tail -f \$@ | bat --paging=never -l log"
 	
 	# Update dotfiles
-	alias dotfiles="export org=$PWD; cd $HOME/.dotfiles/; ./install; cd $org"
+	alias dotfiles="export org=\$PWD; cd \$HOME/.dotfiles/; ./install; cd \$org"
 fi
 
 # For all Systems
