@@ -1,0 +1,22 @@
+[alias]
+	i = init
+	s = status
+	p = push
+	a = add .
+	c = commit -m
+	b = branch
+		
+	ra = remote add
+	po = push origin
+	co = checkout
+
+	pom = push origin master
+[user]
+	name = Brazier85
+	email = github@berger-em.de
+[core]
+	hooksPath = .githooks
+[pull]
+	rebase = false
+[http]
+	sslVerify = false

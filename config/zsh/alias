@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# Alias settings for all systems
+
+# Get OS infos
+source /etc/os-release
+
+# Replace ls with exa
+if which eza >/dev/null; then
+	alias ls="eza --icons -a --group-directories-first"	
+fi
+
+if [[  == fedora ]]; then
+	alias apt="dnf"
+else
+	if which nala >/dev/null; then
+		alias apt="nala"
+	fi
+fi
+
+# General linux
+if [[ linux-gnu == linux* ]]; then
+	
+	# cat to batcat
+	if which bat >/dev/null; then
+		alias cat="bat"
+	fi
+	
+	# WSL
+	if uname -r | grep -q "microsoft"; then
+		alias src="cd /mnt/c/src/"
+	else
+		alias src="cd /home/runner/src"
+	fi
+
+	# Update dotfiles
+	alias dotfiles="cd /home/runner/.dotfiles/; ./bootstrap.sh --run-all; cd -"
+
+	# Do not use nano
+	alias nano="vim"
+	alias nani="/usr/bin/nano"
+
+	# Backup script
+	alias backup="/home/runner/.local/bin/backup_home"
+
+fi
+
+# macOS aliasses
+if [[ linux-gnu == darwin* ]]; then
+	
+	# cat to batcat
+	if which bat >/dev/null; then
+		alias cat="bat"
+	fi
+	
+	# Tailing test with batcat
+	alias btail="tail -f  | bat --paging=never -l log"
+	
+	# Update dotfiles
+	alias dotfiles="export org=/home/runner/work/dotfiles_bash/dotfiles_bash/dotfiles_bash; cd /home/runner/.dotfiles/; ./install; cd "
+fi
+
+# For all Systems
+
+# Directories
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
