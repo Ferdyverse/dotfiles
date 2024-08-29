@@ -1,1 +1,2 @@
+# Rule for my ThermalPrinter
 UBSYSTEM=="usb", ATTRS{idVendor}=="0aa7", ATTRS{idProduct}=="0304", MODE="0666"
