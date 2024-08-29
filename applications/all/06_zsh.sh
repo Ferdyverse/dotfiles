@@ -1,4 +1,3 @@
-log "INFO" "Installing ZSH..."
 
 is_package_installed "zsh" || install_package "zsh"
 
@@ -8,7 +7,6 @@ create_symlink "$SCRIPT_DIR/config/zsh/alias" "$HOME/.alias"
 create_symlink "$SCRIPT_DIR/config/zsh/custom_env" "$HOME/.custom_env"
 create_symlink "$SCRIPT_DIR/config/zsh/starship.toml" "$HOME/.config/starship.toml"
 
-log "INFO" "Installing oh-my-zsh..."
 if [ -d $HOME/.oh-my-zsh ]; then
     if [ ! -d $HOME/.oh-my-zsh/.git ]; then
         rm -rf $HOME/.oh-my-zsh
@@ -31,5 +29,3 @@ fi
 log "INFO" "Make ZSH to default shell..."
 log "WARNING" "I did not find a way to do this without entering the sudo password"
 sudo chsh -s $(which zsh) $USER
-
-log "INFO" "ZSH done!"

@@ -50,8 +50,6 @@ install_fonts_from_directory() {
     fi
 }
 
-log "INFO" "Starting font installation script"
-
 local font_dir="$SCRIPT_DIR/config/fonts/"
 
 # Determine the Linux distribution
@@ -68,6 +66,3 @@ if ! command -v fc-cache &> /dev/null; then
 fi
 
 install_fonts_from_directory "$font_dir"
-
-log "SUCCESS" "Font installation process completed"
-

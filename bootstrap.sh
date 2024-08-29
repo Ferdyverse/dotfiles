@@ -22,6 +22,7 @@ DISTRO=$(source /etc/os-release 2>/dev/null && echo $ID || { log "ERROR" "Unknow
 IS_WSL=$(grep -qiE "(Microsoft|WSL)" /proc/version && echo true || echo false)
 RUNNING_GNOME=$( [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]] && echo true || echo false)
 WORK=false
+SHOW_DEBUG=false
 
 # Parse script arguments
 while [[ $# -gt 0 ]]; do
@@ -186,7 +187,7 @@ create_symlink() {
 
     # Remove existing file or symlink at the target location if it exists
     if [ -e "$link_name" ] || [ -L "$link_name" ]; then
-        log "INFO" "Removing existing file or symlink $link_name"
+        log "DEBUG" "Removing existing file or symlink $link_name"
         retry_with_sudo "rm -rf \"$link_name\""
         if [ $? -ne 0 ]; then
             log "ERROR" "Error removing $link_name"
@@ -295,7 +296,7 @@ run_scripts_in_directory() {
 
             # If RUN_ALL is true, source the script directly
             if [[ "$run_all" == true ]]; then
-                log "INFO" "RUN_ALL is set. Automatically sourcing $script"
+                log "DEBUG" "RUN_ALL is set. Automatically sourcing $script"
                 if ! source "$script"; then
                     log "ERROR" "Error occurred while running $script"
                     return 1
@@ -365,7 +366,7 @@ update_script() {
             log "ERROR" "Script needs to restart!"
             exit 0
         else
-            log "INFO" "Script is already up-to-date."
+            log "DEBUG" "Script is already up-to-date."
         fi
     fi
 }
@@ -398,7 +399,7 @@ main() {
     system_upgrade
 
     if [ -n "$SCRIPT_FILE" ]; then
-        log "INFO" "Running single script mode"
+        log "DEBUG" "Running single script mode"
         run_single_script $SCRIPT_FILE
     else
         # Install universal applications

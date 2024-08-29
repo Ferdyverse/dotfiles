@@ -10,4 +10,3 @@ do
 done
 
 sudo pipx ensurepath > /dev/null
-log "SUCCESS" "DEB: Basic package installation done!"

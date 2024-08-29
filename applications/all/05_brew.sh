@@ -1,4 +1,3 @@
-log "INFO" "Installing Linuxbrew..."
 
 if ! type brew > /dev/null 2>&1; then
   export NONINTERACTIVE=1
@@ -11,8 +10,4 @@ fi
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALL_UPGRADE=1
 
-log "INFO" "Installing Linuxbrew packages..."
-
 brew bundle install --no-upgrade --no-lock --file "$SCRIPT_DIR/config/homebrew/linux/Brewfile"
-
-log "INFO" "linuxbrew done"

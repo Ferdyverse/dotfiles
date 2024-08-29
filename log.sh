@@ -20,8 +20,10 @@ log() {
         "ERROR")
             echo -e "${RED}[$timestamp] [ERROR]: $message${NC}"
             ;;
-        "DESCRIPTION")
-            echo -e "${PURPLE}[$timestamp] [ERROR]: $message${NC}"
+        "DEBUG")
+            if $SHOW_DEBUG; then
+                echo -e "${PURPLE}[$timestamp] [DEBUG]: $message${NC}"
+            fi
             ;;
         *)
             echo -e "${BLUE}[$timestamp] [LOG]: $message${NC}"

@@ -1,7 +1,5 @@
 # Add links to custom scripts
 
-log "INFO" "Installing custom scripts..."
-
 ensure_directories "$HOME/.local/bin/"
 
 create_symlink "$SCRIPT_DIR/config/scripts/backup_home.sh" "$HOME/.local/bin/backup_home"
