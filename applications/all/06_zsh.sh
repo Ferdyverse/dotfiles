@@ -7,19 +7,19 @@ create_symlink "$SCRIPT_DIR/config/zsh/alias" "$HOME/.alias"
 create_symlink "$SCRIPT_DIR/config/zsh/custom_env" "$HOME/.custom_env"
 create_symlink "$SCRIPT_DIR/config/zsh/starship.toml" "$HOME/.config/starship.toml"
 
+# Test is .oh-my-zsh is installed from git
 if [ -d $HOME/.oh-my-zsh ]; then
     if [ ! -d $HOME/.oh-my-zsh/.git ]; then
         rm -rf $HOME/.oh-my-zsh
     fi
-elif [ ! -d $HOME/.oh-my-zsh ]; then
+fi
+
+# Install oh-my-zsh
+if [ ! -d $HOME/.oh-my-zsh ]; then
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
-if [ "$WORK" = true ]; then
-    create_symlink "$SCRIPT_DIR/config/zsh/zshrc.work" "$HOME/.zshrc"
-else
-    create_symlink "$SCRIPT_DIR/config/zsh/zshrc" "$HOME/.zshrc"
-fi
+create_symlink "$SCRIPT_DIR/config/zsh/zshrc${WORK:+.work}" "$HOME/.zshrc"
 
 if [ -d ~/.oh-my-zsh ]; then
     clone_repository "https://github.com/zsh-users/zsh-autosuggestions" "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"

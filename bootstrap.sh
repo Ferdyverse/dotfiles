@@ -24,8 +24,10 @@ CONFIG_DIR="$SCRIPT_DIR/config"
 DISTRO=$(source /etc/os-release 2>/dev/null && echo $ID || { log "ERROR" "Unknown Linux distribution"; exit 1; })
 IS_WSL=$(grep -qiE "(Microsoft|WSL)" /proc/version && echo true || echo false)
 RUNNING_GNOME=$( [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]] && echo true || echo false)
-WORK=false
 SHOW_DEBUG=false
+
+# Make sure $WORK is unset
+unset WORK
 
 # Parse script arguments
 while [[ $# -gt 0 ]]; do
@@ -50,7 +52,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 
-log "INFO" "WORK is: $WORK"
+log "INFO" "WORK is: " && $( [[ "$WORK" ]]) && echo -n true || echo -n false
 
 # Installation function based on distribution
 install_package() {
@@ -116,16 +118,6 @@ is_package_installed() {
             fi
         fi
     done
-
-    # Check if snap is installed
-    if command -v snap &>/dev/null; then
-        snap list "$package" &>/dev/null && { log "INFO" "Package '$package' is installed via snap"; return 0; }
-    fi
-
-    # Check if flatpak is installed
-    if command -v flatpak &>/dev/null; then
-        flatpak list --app | grep -qw "$package" && { log "INFO" "Package '$package' is installed via flatpak"; return 0; }
-    fi
 
     log "INFO" "Package '$package' is not installed"
     return 1
