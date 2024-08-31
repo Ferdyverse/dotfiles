@@ -51,9 +51,6 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-
-log "INFO" "WORK is: " && $( [[ "$WORK" ]]) && echo -n true || echo -n false
-
 # Installation function based on distribution
 install_package() {
     local package="$1"
@@ -100,19 +97,19 @@ is_package_installed() {
         fedora) rpm -q "$package" &>/dev/null ;;
         arch) pacman -Q "$package" &>/dev/null ;;
         *) log "ERROR" "Unsupported distribution: $DISTRO"; return 1 ;;
-    esac && { log "INFO" "Package '$package' is installed"; return 0; }
+    esac && { log "DEBUG" "Package '$package' is installed"; return 0; }
 
     # Check if 'snap' or 'flatpak' is installed and verify package presence
     for cmd in snap flatpak; do
         if command -v "$cmd" &>/dev/null; then
             if [ "$cmd" = "snap" ]; then
                 if snap list "$package" &>/dev/null; then
-                    log "INFO" "Package '$package' is installed via Snap"
+                    log "DEBUG" "Package '$package' is installed via Snap"
                     return 0
                 fi
             elif [ "$cmd" = "flatpak" ]; then
                 if flatpak list --app | grep -qw "$package"; then
-                    log "INFO" "Package '$package' is installed via Flatpak"
+                    log "DEBUG" "Package '$package' is installed via Flatpak"
                     return 0
                 fi
             fi
@@ -126,14 +123,14 @@ is_package_installed() {
 check_reboot_needed() {
     # Check for systemd reboot required flag
     if [ -f /run/reboot-required ]; then
-        log "INFO" "Reboot required: /run/reboot-required exists"
+        log "WARNING" "Reboot required: /run/reboot-required exists"
         reboot_prompt "System update requires a reboot to complete."
         return 0
     fi
 
     # Check if there's a need to reboot based on package manager status
     if [ -f /var/run/reboot-required ]; then
-        log "INFO" "Reboot required: /var/run/reboot-required exists"
+        log "WARNING" "Reboot required: /var/run/reboot-required exists"
         reboot_prompt "System update requires a reboot to complete."
         return 0
     fi
@@ -151,7 +148,7 @@ reboot_prompt() {
             log "INFO" "User chose to reboot"
             sudo reboot
         else
-            log "INFO" "User chose not to reboot"
+            log "CINFO" "User chose not to reboot"
         fi
     else
         log "ERROR" "Whiptail is not installed. Unable to show reboot prompt."
@@ -270,6 +267,8 @@ run_scripts_in_directory() {
     if [[ ! -d "$directory" ]]; then
         log "ERROR" "Directory $directory not found"
         return 1
+    else
+        log "CINFO" "Running scripts in $directory"
     fi
 
     # Loop through each .sh file in the directory

@@ -9,6 +9,9 @@ log() {
 
     case "$type" in
         "INFO")
+            echo -e "[$timestamp] [INFO]: $message"
+            ;;
+        "CINFO")
             echo -e "${CYAN}[$timestamp] [INFO]: $message${NC}"
             ;;
         "SUCCESS")
