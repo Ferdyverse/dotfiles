@@ -14,7 +14,7 @@ touch config/gnome/.gitkeep
 touch config/ssh/config
 touch config/ssh/config.work
 touch config/zsh/alias
-touch config/zsh/zshrv.work
+touch config/zsh/zshrc.work
 
 cat <<EOT > config/zsh/alias
 #!/bin/bash
@@ -85,4 +85,29 @@ fi
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+EOT
+
+cat <<EOT > config/scripts/backup_script.conf
+# SMB credentials
+SMB_USERNAME="mylocaluser"            # Your SMB username
+SMB_PASSWORD="superawsomepassword"    # Your SMB password
+SMB_SHARE="//192.000.000.001/Backup/" # SMB share path
+
+# Backup destination mount point
+BACKUP_DEST="/mnt/backup"               # Mount point for the SMB share
+
+# Directories to back up (space-separated list)
+BACKUP_DIRECTORIES="/home/$(whoami)/.thunderbird /home/$(whoami)/.config /home/$(whoami)/.var/app/com.core447.StreamController"  # Add more directories as needed
+
+# Archive format (e.g., `hostname-$(date +%A).tgz`)
+ARCHIVE_FORMAT="$(hostname)-$(date +%Y-%m-%d).tgz"  # Format for the backup archive filename
+
+# Optional notification URL
+NOTIFY_URL="http://example.com/notify"  # URL for the REST service to send notifications
+
+# Set to true to enable notifications
+NOTIFY=false
+
+# Optional: Number of backups to keep (not used directly in the script, but for reference)
+KEEP_BACKUPS=5
 EOT
