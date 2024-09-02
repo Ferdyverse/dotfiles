@@ -11,6 +11,7 @@
 	co = checkout
 
 	pom = push origin master
+	acp = "!f() { git add -A && git commit -m \"$@\" && git push; }; f"
 [user]
 	name = Brazier85
 	email = github@berger-em.de
