@@ -7,6 +7,7 @@ rm -rf config/scripts/backup_script.conf
 rm -rf config/ssh/*
 rm -rf config/zsh/alias
 rm -rf config/zsh/zshrc.work
+rm -rf config/hosts/*
 
 echo "Add keep and dummy files"
 touch config/git/gitconfig.work
@@ -15,6 +16,7 @@ touch config/ssh/config
 touch config/ssh/config.work
 touch config/zsh/alias
 touch config/zsh/zshrc.work
+touch config/hosts/.gitkeep
 
 cat <<EOT > config/zsh/alias
 #!/bin/bash

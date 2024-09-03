@@ -19,12 +19,18 @@ APPLICATIONS_WSL_DIR="$SCRIPT_DIR/applications/wsl"
 APPLICATIONS_GNOME_DIR="$SCRIPT_DIR/applications/gnome"
 CONFIG_DIR="$SCRIPT_DIR/config"
 
-
 # Determine distribution and environment
 DISTRO=$(source /etc/os-release 2>/dev/null && echo $ID || { log "ERROR" "Unknown Linux distribution"; exit 1; })
 IS_WSL=$(grep -qiE "(Microsoft|WSL)" /proc/version && echo true || echo false)
 RUNNING_GNOME=$( [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]] && echo true || echo false)
 SHOW_DEBUG=false
+
+# Set the IS_ONLINE variable (true to check for internet, false to skip)
+IS_ONLINE=true
+
+# Determine the hostname and configuration file path
+HOSTNAME=$(hostname)
+CONFIG_FILE="$SCRIPT_DIR/config/hosts/${HOSTNAME}.conf"
 
 # Make sure $WORK is unset
 unset WORK
@@ -201,8 +207,12 @@ create_symlink() {
 clone_repository() {
     local repo_url="$1" target_dir="$2"
     if [ -d "$target_dir" ]; then
-        log "INFO" "Updating repository in $target_dir"
-        git -C "$target_dir" pull --quiet > /dev/null
+        if [ "$IS_ONLINE" = true ]; then
+            log "INFO" "Updating repository in $target_dir"
+            git -C "$target_dir" pull --quiet > /dev/null
+        else
+            log "WARNING" "We are offline. I can not update"
+        fi
     else
         log "INFO" "Cloning repository $repo_url into $target_dir"
         git clone --quiet "$repo_url" "$target_dir" > /dev/null
@@ -212,7 +222,9 @@ clone_repository() {
 # Function to ensure directories exist
 ensure_directories() {
     for dir in "$@"; do
+        log "DEBUG" "Making sure ${dir} exists"
         [[ ! -d "$dir" ]] && retry_with_sudo "mkdir -p \"$dir\""
+        log "DEBUG" "${dir} exists"
     done
 }
 
@@ -287,6 +299,12 @@ run_scripts_in_directory() {
 
             # Remove leading zeros from the prefix
             prefix=$((10#$prefix))
+
+            # Check if the script is blacklisted
+            if is_blacklisted "$script_name"; then
+                log "WARNING" "Skipping blacklisted script $script_name"
+                continue
+            fi
 
             # If RUN_ALL is true, source the script directly
             if [[ "$run_all" == true ]]; then
@@ -365,12 +383,58 @@ update_script() {
     fi
 }
 
+# Function to create a default configuration file
+create_default_config() {
+    log "INFO" "Creating default configuration file at $CONFIG_FILE"
+    echo -e "# Blacklisted scripts\nblacklist=()" > "$CONFIG_FILE"
+}
+
+# Function to load configuration file
+load_config() {
+    if [[ -f "$CONFIG_FILE" ]]; then
+        log "INFO" "Loading configuration from $(basename "$CONFIG_FILE")"
+        source "$CONFIG_FILE"
+    else
+        create_default_config
+        log "INFO" "Default configuration file created. Reloading..."
+        source "$CONFIG_FILE"
+    fi
+}
+
+# Function to check if a script is blacklisted
+is_blacklisted() {
+    local script_name="$1"
+    for blacklisted_script in "${blacklist[@]}"; do
+        if [[ "$script_name" == "$blacklisted_script" ]]; then
+            return 0  # Script is blacklisted
+        fi
+    done
+    return 1  # Script is not blacklisted
+}
+
+# Function to check for internet connectivity
+check_online() {
+    ping -q -c1 google.com &>/dev/null && IS_ONLINE=true || IS_ONLINE=false
+
+    if [ "$IS_ONLINE" = true ]; then
+        log "INFO" "We are online"
+    else
+        log "WARNING" "We are offline"
+    fi
+}
+
 # Main process
 main() {
     log "INFO" "Starting bootstrap process for $DISTRO"
 
+    # Are we online
+    check_online
+
     # Update main repo
     update_script
+
+    # Load or create configuration file
+    load_config
 
     has_sudo_access || { log "ERROR" "No sudo access"; exit 1; }
 
