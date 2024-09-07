@@ -308,7 +308,7 @@ run_scripts_in_directory() {
 
             # If RUN_ALL is true, source the script directly
             if [[ "$run_all" == true ]]; then
-                log "DEBUG" "RUN_ALL is set. Automatically sourcing $script"
+                log "INFO" "RUN_ALL is set. Running $script_name"
                 if ! source "$script"; then
                     log "ERROR" "Error occurred while running $script"
                     return 1
@@ -405,7 +405,7 @@ load_config() {
 is_blacklisted() {
     local script_name="$1"
     for blacklisted_script in "${blacklist[@]}"; do
-        if [[ "$script_name" == "$blacklisted_script" ]]; then
+        if [[ "$script_name" =~ "$blacklisted_script" ]]; then
             return 0  # Script is blacklisted
         fi
     done
