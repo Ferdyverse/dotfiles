@@ -1,4 +1,5 @@
 is_package_installed "vim" || install_package "vim"
+is_package_installed "npm" || install_package "nvm"
 
 ensure_directories "$HOME/.config/"
 
