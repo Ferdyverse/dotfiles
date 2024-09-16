@@ -5,7 +5,10 @@ set -e
 
 # Change to the directory where the script is located
 SCRIPT_DIR="$HOME/.dotfiles"
-cd "$SCRIPT_DIR" || { echo "Failed to change directory to $SCRIPT_DIR"; exit 1; }
+cd "$SCRIPT_DIR" || {
+    echo "Failed to change directory to $SCRIPT_DIR"
+    exit 1
+}
 
 # Import colors and logging functions
 source "$SCRIPT_DIR/colors.sh"
@@ -17,12 +20,16 @@ APPLICATIONS_ARCH_DIR="$SCRIPT_DIR/applications/arch"
 APPLICATIONS_DEB_DIR="$SCRIPT_DIR/applications/deb"
 APPLICATIONS_WSL_DIR="$SCRIPT_DIR/applications/wsl"
 APPLICATIONS_GNOME_DIR="$SCRIPT_DIR/applications/gnome"
+APPLICATIONS_FLATPAK_DIR="$SCRIPT_DIR/applications/flatpak"
 CONFIG_DIR="$SCRIPT_DIR/config"
 
 # Determine distribution and environment
-DISTRO=$(source /etc/os-release 2>/dev/null && echo $ID || { log "ERROR" "Unknown Linux distribution"; exit 1; })
+DISTRO=$(source /etc/os-release 2>/dev/null && echo $ID || {
+    log "ERROR" "Unknown Linux distribution"
+    exit 1
+})
 IS_WSL=$(grep -qiE "(Microsoft|WSL)" /proc/version && echo true || echo false)
-RUNNING_GNOME=$( [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]] && echo true || echo false)
+RUNNING_GNOME=$([[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]] && echo true || echo false)
 SHOW_DEBUG=false
 
 # Set the IS_ONLINE variable (true to check for internet, false to skip)
@@ -38,22 +45,22 @@ unset WORK
 # Parse script arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
-        --work)
-            WORK=true
-            shift # Move to the next argument
-            ;;
-        --run-all)
-            RUN_ALL=true
-            shift # Move to the next argument
-            ;;
-        --file)
-            SCRIPT_FILE="$2"
-            shift 2 # Move to the next argument after the file name
-            ;;
-        *)
-            log "WARNING" "Unknown option: $1"
-            shift # Move to the next argument
-            ;;
+    --work)
+        WORK=true
+        shift # Move to the next argument
+        ;;
+    --run-all)
+        RUN_ALL=true
+        shift # Move to the next argument
+        ;;
+    --file)
+        SCRIPT_FILE="$2"
+        shift 2 # Move to the next argument after the file name
+        ;;
+    *)
+        log "WARNING" "Unknown option: $1"
+        shift # Move to the next argument
+        ;;
     esac
 done
 
@@ -61,10 +68,13 @@ done
 install_package() {
     local package="$1"
     case "$DISTRO" in
-        ubuntu|debian) cmd="sudo apt-get install -qq -y $package" ;;
-        fedora) cmd="sudo dnf install -y $package" ;;
-        arch) cmd="sudo pacman -Syu --noconfirm $package" ;;
-        *) log "ERROR" "Unsupported distribution: $DISTRO"; return 1 ;;
+    ubuntu | debian) cmd="sudo apt-get install -qq -y $package" ;;
+    fedora) cmd="sudo dnf install -y $package" ;;
+    arch) cmd="sudo pacman -Syu --noconfirm $package" ;;
+    *)
+        log "ERROR" "Unsupported distribution: $DISTRO"
+        return 1
+        ;;
     esac
 
     eval "$cmd" && log "SUCCESS" "$package installed" || log "ERROR" "Failed to install $package"
@@ -73,10 +83,13 @@ install_package() {
 # Function to update package cache
 update_cache() {
     case "$DISTRO" in
-        ubuntu|debian) cmd="sudo apt-get -qq update" ;;
-        fedora) cmd="sudo dnf makecache" ;;
-        arch) cmd="sudo pacman -Syy" ;;
-        *) log "ERROR" "Unsupported distribution: $DISTRO"; return 1 ;;
+    ubuntu | debian) cmd="sudo apt-get -qq update" ;;
+    fedora) cmd="sudo dnf makecache" ;;
+    arch) cmd="sudo pacman -Syy" ;;
+    *)
+        log "ERROR" "Unsupported distribution: $DISTRO"
+        return 1
+        ;;
     esac
 
     eval "$cmd" && log "SUCCESS" "Package cache updated" || log "ERROR" "Failed to update package cache"
@@ -85,10 +98,13 @@ update_cache() {
 # Function to upgrade the system based on distribution
 system_upgrade() {
     case "$DISTRO" in
-        ubuntu|debian) sudo apt-get update -qq && sudo apt-get upgrade -qq -y ;;
-        fedora) sudo dnf upgrade -y ;;
-        arch) sudo pacman -Syu --noconfirm ;;
-        *) log "ERROR" "Unsupported distro: $DISTRO"; return 1 ;;
+    ubuntu | debian) sudo apt-get update -qq && sudo apt-get upgrade -qq -y ;;
+    fedora) sudo dnf upgrade -y ;;
+    arch) sudo pacman -Syu --noconfirm ;;
+    *)
+        log "ERROR" "Unsupported distro: $DISTRO"
+        return 1
+        ;;
     esac
     log "SUCCESS" "System upgrade complete."
 }
@@ -99,11 +115,17 @@ is_package_installed() {
 
     # Check if the package is installed using the native package manager
     case "$DISTRO" in
-        ubuntu|debian) dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -q "install ok installed" ;;
-        fedora) rpm -q "$package" &>/dev/null ;;
-        arch) pacman -Q "$package" &>/dev/null ;;
-        *) log "ERROR" "Unsupported distribution: $DISTRO"; return 1 ;;
-    esac && { log "DEBUG" "Package '$package' is installed"; return 0; }
+    ubuntu | debian) dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -q "install ok installed" ;;
+    fedora) rpm -q "$package" &>/dev/null ;;
+    arch) pacman -Q "$package" &>/dev/null ;;
+    *)
+        log "ERROR" "Unsupported distribution: $DISTRO"
+        return 1
+        ;;
+    esac && {
+        log "DEBUG" "Package '$package' is installed"
+        return 0
+    }
 
     # Check if 'snap' or 'flatpak' is installed and verify package presence
     for cmd in snap flatpak; do
@@ -150,7 +172,7 @@ reboot_prompt() {
 
     if command -v whiptail &>/dev/null; then
         if whiptail --title "Reboot Required" \
-                --yesno "$reason\n\nDo you want to reboot now?" 10 50; then
+            --yesno "$reason\n\nDo you want to reboot now?" 10 50; then
             log "INFO" "User chose to reboot"
             sudo reboot
         else
@@ -161,7 +183,6 @@ reboot_prompt() {
     fi
 }
 
-
 # Function to ensure sudo access
 has_sudo_access() {
     sudo -v && return 0 || return 1
@@ -170,18 +191,24 @@ has_sudo_access() {
 # Function to execute command with or without sudo
 retry_with_sudo() {
     local cmd="$1"
-    eval "$cmd" || { [[ "$cmd" =~ mkdir && -d "${cmd##* }" ]] && return 0; sudo bash -c "$cmd"; }
+    eval "$cmd" || {
+        [[ "$cmd" =~ mkdir && -d "${cmd##* }" ]] && return 0
+        sudo bash -c "$cmd"
+    }
 }
 
 # Function to determine non-root user
 get_non_root_user() {
     local user=$(whoami 2>/dev/null || id -un 2>/dev/null || logname 2>/dev/null)
-    [[ "$user" != "root" ]] && echo "$user" || { log "ERROR" "Cannot run as root"; exit 1; }
+    [[ "$user" != "root" ]] && echo "$user" || {
+        log "ERROR" "Cannot run as root"
+        exit 1
+    }
 }
 
 create_symlink() {
-    local target="$1"   # Target of the symlink
-    local link_name="$2"  # Name of the symlink
+    local target="$1"    # Target of the symlink
+    local link_name="$2" # Name of the symlink
 
     # Remove existing file or symlink at the target location if it exists
     if [ -e "$link_name" ] || [ -L "$link_name" ]; then
@@ -209,13 +236,13 @@ clone_repository() {
     if [ -d "$target_dir" ]; then
         if [ "$IS_ONLINE" = true ]; then
             log "INFO" "Updating repository in $target_dir"
-            git -C "$target_dir" pull --quiet > /dev/null
+            git -C "$target_dir" pull --quiet >/dev/null
         else
             log "WARNING" "We are offline. I can not update"
         fi
     else
         log "INFO" "Cloning repository $repo_url into $target_dir"
-        git clone --quiet "$repo_url" "$target_dir" > /dev/null
+        git clone --quiet "$repo_url" "$target_dir" >/dev/null
     fi
 }
 
@@ -252,7 +279,7 @@ run_single_script() {
     local script_count
     script_count=$(find . -type f -name "$script_name" 2>/dev/null | wc -l)
 
-    if (( script_count > 1 )); then
+    if ((script_count > 1)); then
         log "ERROR" "Multiple scripts named $script_name found. Please specify a unique script."
         return 1
     fi
@@ -273,7 +300,7 @@ run_single_script() {
 # Function to run application scripts
 run_scripts_in_directory() {
     local directory="$1"
-    local run_all="${RUN_ALL:-false}"  # Check if RUN_ALL is set, default to false
+    local run_all="${RUN_ALL:-false}" # Check if RUN_ALL is set, default to false
 
     # Check if the directory exists
     if [[ ! -d "$directory" ]]; then
@@ -317,7 +344,7 @@ run_scripts_in_directory() {
             fi
 
             # Check if the prefix is within the specified range
-            if (( prefix >= 50 && prefix < 90 )); then
+            if ((prefix >= 50 && prefix < 90)); then
                 # Prepare message for whiptail
                 message=$(printf "Script: %s\n\nDescription:\n%s" "$script_name" "$description")
                 if whiptail --title "Source Script" --yes-button "Yes" --no-button "No" --yesno "$message" 15 60; then
@@ -343,8 +370,6 @@ run_scripts_in_directory() {
     done
 }
 
-
-
 # Function to update the script
 update_script() {
     log "INFO" "Checking for script updates..."
@@ -354,7 +379,7 @@ update_script() {
     current_commit=$(git rev-parse HEAD)
 
     # Pull the latest changes from the repository
-    if ! git pull --quiet > /dev/null; then
+    if ! git pull --quiet >/dev/null; then
         log "ERROR" "Failed to update the script repository"
         log "WARNING" "Using local version"
     else
@@ -368,7 +393,7 @@ update_script() {
         if [ "$current_commit" != "$new_commit" ]; then
             # Show a whiptail dialog informing about the update
             whiptail --title "Script Updated" \
-                    --msgbox "The script has been updated to the latest version.\n\nNew commit: $new_commit\nCommit message: $new_commit_message\n\nPlease restart the script to apply the changes." 15 60
+                --msgbox "The script has been updated to the latest version.\n\nNew commit: $new_commit\nCommit message: $new_commit_message\n\nPlease restart the script to apply the changes." 15 60
 
             log "INFO" "Script updated to the latest version."
             log "INFO" "New commit: $new_commit"
@@ -386,7 +411,7 @@ update_script() {
 # Function to create a default configuration file
 create_default_config() {
     log "INFO" "Creating default configuration file at $CONFIG_FILE"
-    echo -e "# Blacklisted scripts\nblacklist=()" > "$CONFIG_FILE"
+    echo -e "# Blacklisted scripts\nblacklist=()" >"$CONFIG_FILE"
 }
 
 # Function to load configuration file
@@ -406,10 +431,10 @@ is_blacklisted() {
     local script_name="$1"
     for blacklisted_script in "${blacklist[@]}"; do
         if [[ "$script_name" =~ "$blacklisted_script" ]]; then
-            return 0  # Script is blacklisted
+            return 0 # Script is blacklisted
         fi
     done
-    return 1  # Script is not blacklisted
+    return 1 # Script is not blacklisted
 }
 
 # Function to check for internet connectivity
@@ -436,7 +461,10 @@ main() {
     # Load or create configuration file
     load_config
 
-    has_sudo_access || { log "ERROR" "No sudo access"; exit 1; }
+    has_sudo_access || {
+        log "ERROR" "No sudo access"
+        exit 1
+    }
 
     USER=$(get_non_root_user)
     if [ $? -eq 0 ]; then
@@ -465,15 +493,15 @@ main() {
 
         # Install distribution-specific applications
         case "$DISTRO" in
-            arch)
-                run_scripts_in_directory "$APPLICATIONS_ARCH_DIR"
-                ;;
-            ubuntu|debian)
-                run_scripts_in_directory "$APPLICATIONS_DEB_DIR"
-                ;;
-            *)
-                log "WARNING" "No specific scripts found for $DISTRO"
-                ;;
+        arch)
+            run_scripts_in_directory "$APPLICATIONS_ARCH_DIR"
+            ;;
+        ubuntu | debian)
+            run_scripts_in_directory "$APPLICATIONS_DEB_DIR"
+            ;;
+        *)
+            log "WARNING" "No specific scripts found for $DISTRO"
+            ;;
         esac
 
         # Install WSL-specific applications if WSL is detected
@@ -485,6 +513,7 @@ main() {
         if $RUNNING_GNOME; then
             # Install desktop tools and tweaks
             run_scripts_in_directory "$APPLICATIONS_GNOME_DIR"
+            run_scripts_in_directory "$APPLICATIONS_FLATPAK_DIR"
         fi
     fi
 
