@@ -148,6 +148,7 @@ is_package_installed() {
     return 1
 }
 
+# Do we need to reboot?
 check_reboot_needed() {
     # Check for systemd reboot required flag
     if [ -f /run/reboot-required ]; then
@@ -167,6 +168,7 @@ check_reboot_needed() {
     return 1
 }
 
+# Ask user for a reboot
 reboot_prompt() {
     local reason="$1"
 
@@ -206,6 +208,7 @@ get_non_root_user() {
     }
 }
 
+# Create a symlink
 create_symlink() {
     local target="$1"    # Target of the symlink
     local link_name="$2" # Name of the symlink
@@ -461,11 +464,13 @@ main() {
     # Load or create configuration file
     load_config
 
+    # Check for sudo access
     has_sudo_access || {
         log "ERROR" "No sudo access"
         exit 1
     }
 
+    # Get current running user
     USER=$(get_non_root_user)
     if [ $? -eq 0 ]; then
         log "INFO" "Current user: $USER"
@@ -474,16 +479,19 @@ main() {
         exit 1
     fi
 
+    # Are we in GNOME?
     if $RUNNING_GNOME; then
         # Ensure computer doesn't go to sleep or lock while installing
         gsettings set org.gnome.desktop.screensaver lock-enabled false
         gsettings set org.gnome.desktop.session idle-delay 0
     fi
 
+    # Doing system update
     log "INFO" "Running system update"
     log "INFO" "This may take a while..."
     system_upgrade
 
+    # Single script or folder scripts
     if [ -n "$SCRIPT_FILE" ]; then
         log "DEBUG" "Running single script mode"
         run_single_script $SCRIPT_FILE
@@ -526,6 +534,7 @@ main() {
 
     log "SUCCESS" "Bootstrap process completed"
 
+    # Do we need a reboot?
     check_reboot_needed
 }
 
