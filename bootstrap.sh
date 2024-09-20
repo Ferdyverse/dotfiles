@@ -84,7 +84,7 @@ install_package() {
 
 use_yay() {
     local package="$1"
-    cmd="sudo yay -Syu --noconfirm  $package"
+    cmd="yay -Syu --noconfirm $package"
     eval "$cmd" && log "SUCCESS" "$package installed" || log "ERROR" "Failed to install $package"
 }
 
@@ -336,7 +336,7 @@ run_scripts_in_directory() {
             description=$(head -n 1 "$script" | sed 's/^# //')
 
             # Remove leading zeros from the prefix
-            prefix=$((10#$prefix))
+            # prefix=$((10#$prefix))
 
             # Check if the script is blacklisted
             if is_blacklisted "$script_name"; then
@@ -531,7 +531,7 @@ main() {
             run_scripts_in_directory "$APPLICATIONS_GNOME_DIR_ALL"
 
             case "$DISTRO" in
-            arch)
+            arch | manjaro)
                 run_scripts_in_directory "$APPLICATIONS_GNOME_DIR_ARCH"
                 ;;
             ubuntu | debian)
@@ -541,7 +541,7 @@ main() {
                 log "WARNING" "No specific scripts found for $DISTRO"
                 ;;
             esac
-            
+
             run_scripts_in_directory "$APPLICATIONS_FLATPAK_DIR"
         fi
     fi
