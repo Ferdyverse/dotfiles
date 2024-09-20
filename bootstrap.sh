@@ -19,7 +19,9 @@ APPLICATIONS_ALL_DIR="$SCRIPT_DIR/applications/all"
 APPLICATIONS_ARCH_DIR="$SCRIPT_DIR/applications/arch"
 APPLICATIONS_DEB_DIR="$SCRIPT_DIR/applications/deb"
 APPLICATIONS_WSL_DIR="$SCRIPT_DIR/applications/wsl"
-APPLICATIONS_GNOME_DIR="$SCRIPT_DIR/applications/gnome"
+APPLICATIONS_GNOME_DIR_ALL="$SCRIPT_DIR/applications/gnome_all"
+APPLICATIONS_GNOME_DIR_ARCH="$SCRIPT_DIR/applications/gnome_arch"
+APPLICATIONS_GNOME_DIR_DEB="$SCRIPT_DIR/applications/gnome_deb"
 APPLICATIONS_FLATPAK_DIR="$SCRIPT_DIR/applications/flatpak"
 CONFIG_DIR="$SCRIPT_DIR/config"
 
@@ -77,6 +79,12 @@ install_package() {
         ;;
     esac
 
+    eval "$cmd" && log "SUCCESS" "$package installed" || log "ERROR" "Failed to install $package"
+}
+
+use_yay() {
+    local package="$1"
+    cmd="sudo yay -Syu --noconfirm  $package"
     eval "$cmd" && log "SUCCESS" "$package installed" || log "ERROR" "Failed to install $package"
 }
 
@@ -520,7 +528,20 @@ main() {
         # If on gnome
         if $RUNNING_GNOME; then
             # Install desktop tools and tweaks
-            run_scripts_in_directory "$APPLICATIONS_GNOME_DIR"
+            run_scripts_in_directory "$APPLICATIONS_GNOME_DIR_ALL"
+
+            case "$DISTRO" in
+            arch)
+                run_scripts_in_directory "$APPLICATIONS_GNOME_DIR_ARCH"
+                ;;
+            ubuntu | debian)
+                un_scripts_in_directory "$APPLICATIONS_GNOME_DIR_DEB"
+                ;;
+            *)
+                log "WARNING" "No specific scripts found for $DISTRO"
+                ;;
+            esac
+            
             run_scripts_in_directory "$APPLICATIONS_FLATPAK_DIR"
         fi
     fi
