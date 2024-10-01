@@ -1,0 +1,2 @@
+# Rule for Razer Naga
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="1532", ATTR{idProduct}=="0067", TEST=="power/control", ATTR{power/control}="on"

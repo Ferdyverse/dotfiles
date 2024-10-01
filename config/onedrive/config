@@ -1,9 +1,4 @@
-# Directory where the files will be synced
-sync_dir = "~/OneDrive"
-
-# Sync all files in the root folder
 sync_root_files = "true"
-
-# Skip files and directories that match this pattern
+resync = "true"
 skip_file = "~*|.~*|*.tmp"
 
