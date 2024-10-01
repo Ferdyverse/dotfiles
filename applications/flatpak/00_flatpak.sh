@@ -3,6 +3,8 @@ if ! is_package_installed "flatpak"; then
     sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 fi
 
-if ! is_package_installed "gnome-software-plugin-flatpak"; then
-    install_package gnome-software-plugin-flatpak
+if [[ "$DISTRO" = "ubuntu" || "$DISTRO" = "debian" ]]; then
+    if ! is_package_installed "gnome-software-plugin-flatpak"; then
+        install_package gnome-software-plugin-flatpak
+    fi
 fi
