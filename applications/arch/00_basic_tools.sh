@@ -1,4 +1,4 @@
-packages=(noto-fonts-emoji base-devel yay python3-pipx fd)
+packages=(noto-fonts-emoji base-devel yay python-pipx fd)
 
 for package in "${packages[@]}"; do
     if ! is_package_installed "$package"; then
