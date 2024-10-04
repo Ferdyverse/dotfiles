@@ -21,3 +21,5 @@
 	rebase = false
 [http]
 	sslVerify = false
+[init]
+	defaultBranch = main

@@ -72,7 +72,8 @@ install_package() {
     case "$DISTRO" in
     ubuntu | debian) cmd="sudo apt-get install -qq -y $package" ;;
     fedora) cmd="sudo dnf install -y $package" ;;
-    arch | manjaro) cmd="sudo pacman -Syu --noconfirm $package" ;;
+    arch) cmd="sudo pacman -Syu --noconfirm $package" ;;
+    manjaro) cmd="sudo pamac install --no-confirm $package" ;;
     *)
         log "ERROR" "Unsupported distribution: $DISTRO"
         return 1
@@ -82,18 +83,13 @@ install_package() {
     eval "$cmd" && log "SUCCESS" "$package installed" || log "ERROR" "Failed to install $package"
 }
 
-use_yay() {
-    local package="$1"
-    cmd="yay -Syu --noconfirm $package"
-    eval "$cmd" && log "SUCCESS" "$package installed" || log "ERROR" "Failed to install $package"
-}
-
 # Function to update package cache
 update_cache() {
     case "$DISTRO" in
     ubuntu | debian) cmd="sudo apt-get -qq update" ;;
     fedora) cmd="sudo dnf makecache" ;;
-    arch | manjaro) cmd="sudo pacman -Syy" ;;
+    arch) cmd="sudo pacman -Syy" ;;
+    manjaro) cmd="sudo pamac update" ;;
     *)
         log "ERROR" "Unsupported distribution: $DISTRO"
         return 1
@@ -109,6 +105,7 @@ system_upgrade() {
     ubuntu | debian) sudo apt-get update -qq && sudo apt-get upgrade -qq -y ;;
     fedora) sudo dnf upgrade -y ;;
     arch | manjaro) sudo pacman -Syu --noconfirm ;;
+    manjaro) sudo pamac upgrade --no-confirm ;;
     *)
         log "ERROR" "Unsupported distro: $DISTRO"
         return 1
@@ -550,7 +547,7 @@ main() {
     if $RUNNING_GNOME; then
         # Revert to normal idle and lock settings
         gsettings set org.gnome.desktop.screensaver lock-enabled true
-        gsettings set org.gnome.desktop.session idle-delay 300
+        gsettings set org.gnome.desktop.session idle-delay 900
     fi
 
     log "SUCCESS" "Bootstrap process completed"

@@ -1,3 +1,3 @@
 if ! is_package_installed "gdm-settings"; then
-    use_yay "gdm-settings"
+    install_package gdm-settings
 fi
