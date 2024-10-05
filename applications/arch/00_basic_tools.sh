@@ -1,4 +1,4 @@
-packages=(noto-fonts-emoji base-devel python-pipx fd)
+packages=(noto-fonts-emoji base-devel python-pipx fd bat eza starship neovim lazygit)
 
 for package in "${packages[@]}"; do
     if ! is_package_installed "$package"; then
