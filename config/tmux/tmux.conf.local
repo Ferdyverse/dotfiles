@@ -302,3 +302,4 @@ bind S setw synchronize-panes
 
 # -- Plugins ------------------------
 set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @resurrect-capture-pane-contents 'on'
