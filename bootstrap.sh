@@ -275,7 +275,7 @@ run_single_script() {
 
     # Search for the script starting from the current directory
     local script_path
-    script_path=$(find . -type f -name "*$script_name*" 2>/dev/null | head -n 1)
+    script_path=$(find ./applications/ -type f -name "*$script_name*" 2>/dev/null | head -n 1)
 
     # Check if the script was found
     if [[ -z "$script_path" ]]; then
@@ -285,7 +285,7 @@ run_single_script() {
 
     # Check if multiple scripts with the same name were found
     local script_count
-    script_count=$(find . -type f -name "$script_name" 2>/dev/null | wc -l)
+    script_count=$(find ./applications/ -type f -name "$script_name" 2>/dev/null | wc -l)
 
     if ((script_count > 1)); then
         log "ERROR" "Multiple scripts named $script_name found. Please specify a unique script."
