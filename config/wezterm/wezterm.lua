@@ -38,7 +38,7 @@ config.keys = {
 	-- Spawn new Tab --
 	{ key = "n", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
 	-- Show Launcher --
-	{ key = "l", mods = "ALT", action = act.ShowLauncher },
+	{ key = "l", mods = "ALT", action = act.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS" }) },
 	-- Change Tab name --
 	{
 		key = "E",
