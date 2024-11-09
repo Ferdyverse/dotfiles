@@ -20,7 +20,7 @@ config.font_size = font_size
 config.font = wezterm.font("MesloLGS NF")
 
 -- Changing the color scheme:
-config.color_scheme = "Obsidian"
+config.color_scheme = "Dracula"
 
 -- Keybindings
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
@@ -76,6 +76,18 @@ config.launch_menu = {
 		args = { "btop" },
 	},
 }
+
+-- Tab Bar --
+config.enable_tab_bar = true
+config.hide_tab_bar_if_only_one_tab = true
+config.show_tab_index_in_tab_bar = false
+config.tab_bar_at_bottom = true
+
+-- Things for Windows
+if wezterm.target_triple:find("windows") ~= nil then
+	-- Set WLS as default on Windows
+	config.default_domain = "WSL:WSL"
+end
 
 -- Return the configuration to wezterm
 return config
