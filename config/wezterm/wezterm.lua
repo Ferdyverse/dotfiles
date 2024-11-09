@@ -23,11 +23,58 @@ config.font = wezterm.font("MesloLGS NF")
 config.color_scheme = "Obsidian"
 
 -- Keybindings
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
-	{ key = "LeftArrow", mods = "CTRL|SUPER", action = act.ActivatePaneDirection("Left") },
-	{ key = "RightArrow", mods = "CTRL|SUPER", action = act.ActivatePaneDirection("Right") },
-	{ key = "UpArrow", mods = "CTRL|SUPER", action = act.ActivatePaneDirection("Up") },
-	{ key = "DownArrow", mods = "CTRL|SUPER", action = act.ActivatePaneDirection("Down") },
+	-- Split Panes --
+	{ key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ key = "|", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	-- Zoom Pane --
+	{ key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
+	-- Move between Panes --
+	{ key = "LeftArrow", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+	{ key = "RightArrow", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+	{ key = "UpArrow", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+	{ key = "DownArrow", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+	-- Spawn new Tab --
+	{ key = "n", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+	-- Show Launcher --
+	{ key = "l", mods = "ALT", action = act.ShowLauncher },
+	-- Change Tab name --
+	{
+		key = "E",
+		mods = "CTRL|SHIFT",
+		action = act.PromptInputLine({
+			description = "Enter new name for tab",
+			action = wezterm.action_callback(function(window, pane, line)
+				-- line will be `nil` if they hit escape without entering anything
+				-- An empty string if they just hit enter
+				-- Or the actual line of text they wrote
+				if line then
+					window:active_tab():set_title(line)
+				end
+			end),
+		}),
+	},
+}
+
+-- Map F-Keys to Tabs --
+for i = 1, 8 do
+	-- F1 through F8 to activate that tab
+	table.insert(config.keys, {
+		key = "F" .. tostring(i),
+		action = act.ActivateTab(i - 1),
+	})
+end
+
+config.launch_menu = {
+	{
+		label = "Top",
+		args = { "top" },
+	},
+	{
+		label = "Btop",
+		args = { "btop" },
+	},
 }
 
 -- Return the configuration to wezterm
