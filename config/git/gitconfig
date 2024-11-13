@@ -16,7 +16,7 @@
 	name = Brazier85
 	email = github@berger-em.de
 [core]
-	hooksPath = .githooks
+	hooksPath = $HOME/.config/git/hooks
 [pull]
 	rebase = false
 [http]

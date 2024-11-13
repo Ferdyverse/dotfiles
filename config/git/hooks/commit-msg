@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+
+# .githooks/commit-msg
+import sys
+import re
+
+PATTERN_STRING = '^(feat|fix|build|chore|docs|style|refactor|perf|test)(\(.*\))?!?: (.+[^.\r\n])([\r\n]+(.+[\r\n]+)+)?$'
+
+# Get commit message file
+commit_msg_file = sys.argv[1]
+
+# Open the file and read the content
+with open(commit_msg_file, "r") as f:
+    commit_msg = f.read()
+
+# Check for a valid commit message
+pattern = re.compile(PATTERN_STRING)
+if not pattern.match(commit_msg):
+    print("❌ Fix your commit message! ❌")
+    print("Requested pattern is `type(scope): subject`")
+    sys.exit(1)
