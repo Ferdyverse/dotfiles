@@ -6,6 +6,8 @@ import re
 
 PATTERN_STRING = '^(feat|fix|build|chore|docs|style|refactor|perf|test)(\(.*\))?!?: (.+[^.\r\n])([\r\n]+(.+[\r\n]+)+)?$'
 
+print("Running `commit-msg` hook... ")
+
 # Get commit message file
 commit_msg_file = sys.argv[1]
 
@@ -19,3 +21,5 @@ if not pattern.match(commit_msg):
     print("❌ Fix your commit message! ❌")
     print("Requested pattern is `type(scope): subject`")
     sys.exit(1)
+
+print("done ✅")
