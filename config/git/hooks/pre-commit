@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Define colors
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+# Path to the file that contains the version
+VERSION_FILE="version.txt"
+
+# Running the hook
+printf "🛠️  Running ${YELLOW}pre-commit${NC} hook...\n"
+
+# Check if the version file exists
+if [ ! -f "$VERSION_FILE" ]; then
+    printf "⚠️  Version file not found, skipping version increment.\n"
+    printf "✅ Done with pre-commit hook.\n"
+    exit 0
+fi
+
+# Read the current version
+CURRENT_VERSION=$(cat $VERSION_FILE)
+
+# Increment the version (assuming format MAJOR.MINOR.PATCH)
+IFS='.' read -r major minor patch <<<"$CURRENT_VERSION"
+patch=$((patch + 1))
+NEW_VERSION="$major.$minor.$patch"
+
+# Write the new version to the file
+echo $NEW_VERSION >$VERSION_FILE
+
+# Add the updated version file to the staging area (so it becomes part of the commit)
+git add $VERSION_FILE
+
+# Output the new version information with emojis
+printf "🚀 Version has been automatically updated to %s\n" "$NEW_VERSION"
+printf "✅ Done with ${YELLOW}pre-commit${NC} hook.\n"

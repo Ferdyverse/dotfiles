@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # .githooks/commit-msg
 
@@ -9,7 +9,7 @@ NC='\033[0m' # No Color
 # Pattern string to check for
 PATTERN_STRING="^(feat|fix|build|chore|docs|style|refactor|perf|test)(\(.*\))?!?: (.+[^.\r\n])([\r\n]+(.+[\r\n]+)+)?$"
 
-printf "Running ${YELLOW}commit-msg${NC} hook...\n"
+printf "🛠️  Running ${YELLOW}commit-msg${NC} hook...\n"
 
 # Get commit message file
 commit_msg_file=$1
@@ -20,4 +20,4 @@ if ! grep -qE "$PATTERN_STRING" "$commit_msg_file"; then
     exit 1
 fi
 
-printf "done ✅\n"
+printf "✅ Done with ${YELLOW}commit-msg${NC} hook.\n"
