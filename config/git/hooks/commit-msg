@@ -2,17 +2,22 @@
 
 # .githooks/commit-msg
 
+# Define colors
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+# Pattern string to check for
 PATTERN_STRING="^(feat|fix|build|chore|docs|style|refactor|perf|test)(\(.*\))?!?: (.+[^.\r\n])([\r\n]+(.+[\r\n]+)+)?$"
 
-echo "Running commit-msg hook... "
+printf "Running ${YELLOW}commit-msg${NC} hook...\n"
 
 # Get commit message file
 commit_msg_file=$1
 
 if ! grep -qE "$PATTERN_STRING" "$commit_msg_file"; then
-    echo "❌ Fix your commit message! ❌"
-    echo "Requested pattern is `type(scope): subject`"
+    printf "❌ Fix your commit message! ❌\n"
+    printf "Requested pattern is ${YELLOW}type(scope): subject${NC}\n"
     exit 1
 fi
 
-echo "done ✅"
+printf "done ✅\n"
