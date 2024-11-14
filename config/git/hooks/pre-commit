@@ -1,36 +1,31 @@
 #!/bin/bash
 
-# Define colors
-YELLOW='\033[0;33m'
-NC='\033[0m' # No Color
+# Define path to custom hooks directory in your HOME
+CUSTOM_HOOKS_DIR="$HOME/.config/git/hooks/scripts"
 
-# Path to the file that contains the version
-VERSION_FILE="version.txt"
+# Source the colors.sh file for color output
+source "$CUSTOM_HOOKS_DIR/colors.sh"
 
-# Running the hook
-printf "🛠️  Running ${YELLOW}pre-commit${NC} hook...\n"
+printf "${CYAN}🛠️  Running pre-commit hook...${RESET}\n"
 
-# Check if the version file exists
-if [ ! -f "$VERSION_FILE" ]; then
-    printf "⚠️  Version file not found, skipping version increment.\n"
-    printf "✅ Done with pre-commit hook.\n"
-    exit 0
+# Run trailing whitespace fixer
+"$CUSTOM_HOOKS_DIR/trailing-whitespace-fixer.sh"
+if [ $? -ne 0 ]; then
+    printf "${RED}❌ Trailing whitespace fixer failed.${RESET}\n"
+    exit 1
 fi
 
-# Read the current version
-CURRENT_VERSION=$(cat $VERSION_FILE)
+# Run end-of-file fixer
+"$CUSTOM_HOOKS_DIR/end-of-file-fixer.sh"
+if [ $? -ne 0 ]; then
+    printf "${RED}❌ End-of-file fixer failed.${RESET}\n"
+    exit 1
+fi
 
-# Increment the version (assuming format MAJOR.MINOR.PATCH)
-IFS='.' read -r major minor patch <<<"$CURRENT_VERSION"
-patch=$((patch + 1))
-NEW_VERSION="$major.$minor.$patch"
+# Run version increment script
+"$CUSTOM_HOOKS_DIR/version-increment.sh"
+if [ $? -ne 0 ]; then
+    printf "${YELLOW}⚠️  Version increment skipped.${RESET}\n"
+fi
 
-# Write the new version to the file
-echo $NEW_VERSION >$VERSION_FILE
-
-# Add the updated version file to the staging area (so it becomes part of the commit)
-git add $VERSION_FILE
-
-# Output the new version information with emojis
-printf "🚀 Version has been automatically updated to %s\n" "$NEW_VERSION"
-printf "✅ Done with ${YELLOW}pre-commit${NC} hook.\n"
+printf "${GREEN}✅ Done with pre-commit hook.${RESET}\n"

@@ -1,23 +1,34 @@
 #!/bin/bash
 
-# .githooks/commit-msg
+# Define path to custom hooks directory in your HOME
+CUSTOM_HOOKS_DIR="$HOME/.config/git/hooks/scripts"
 
-# Define colors
-YELLOW='\033[0;33m'
-NC='\033[0m' # No Color
+# Source the colors.sh file for color output
+source "$CUSTOM_HOOKS_DIR/colors.sh"
 
 # Pattern string to check for
 PATTERN_STRING="^(feat|fix|build|chore|docs|style|refactor|perf|test)(\(.*\))?!?: (.+[^.\r\n])([\r\n]+(.+[\r\n]+)+)?$"
 
-printf "🛠️  Running ${YELLOW}commit-msg${NC} hook...\n"
+# Output message indicating the hook is running
+printf "${CYAN}🛠️  Running commit-msg hook...${RESET}\n"
 
 # Get commit message file
 commit_msg_file=$1
+commit_msg=$(cat "$commit_msg_file")
 
-if ! grep -qE "$PATTERN_STRING" "$commit_msg_file"; then
-    printf "❌ Fix your commit message! ❌\n"
-    printf "Requested pattern is ${YELLOW}type(scope): subject${NC}\n"
+# Validate commit message against the pattern
+if ! echo "$commit_msg" | grep -qE "$PATTERN_STRING"; then
+    printf "${RED}🚫 Commit message does not follow the conventional format${RESET}\n"
+    printf "${YELLOW}Requested pattern is: type(scope): subject${RESET}\n"
+    printf "${GREEN}Example: fix(parser): handle edge case when parsing empty strings${RESET}\n"
     exit 1
 fi
 
-printf "✅ Done with ${YELLOW}commit-msg${NC} hook.\n"
+# Additional check for WIP messages to prevent unfinished work from being committed
+if echo "$commit_msg" | grep -iq "wip"; then
+    printf "${RED}🚫 Commit message contains 'WIP'. Please complete your work before committing.${RESET}\n"
+    exit 1
+fi
+
+# Output message indicating the hook is done
+printf "${GREEN}✅ Done with commit-msg hook.${RESET}\n"
