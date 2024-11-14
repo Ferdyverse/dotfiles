@@ -10,4 +10,4 @@ for FILE in $FILES; do
     git add "$FILE"
 done
 
-echo "✅ Trailing whitespaces removed for staged files."
+printf "✅ Trailing whitespaces removed for staged files.\n"

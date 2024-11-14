@@ -15,4 +15,4 @@ for FILE in $FILES; do
     git add "$FILE"
 done
 
-echo "✅ End-of-file newlines fixed for staged files."
+printf "✅ End-of-file newlines fixed for staged files.\n"
