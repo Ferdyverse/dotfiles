@@ -7,7 +7,7 @@ CUSTOM_HOOKS_DIR="$HOME/.config/git/hooks/scripts"
 source "$CUSTOM_HOOKS_DIR/colors.sh"
 
 # Pattern string to check for
-PATTERN_STRING="^(feat|fix|build|chore|docs|style|refactor|perf|test)(\(.*\))?!?: (.+[^.\r\n])([\r\n]+(.+[\r\n]+)+)?$"
+PATTERN_STRING="^(feat|fix|build|chore|docs|style|refactor|perf|test)(\([^)]+\))?!?: (.+[^.\r\n])([\r\n]+(.+[\r\n]+)+)?$"
 
 # Output message indicating the hook is running
 printf "${CYAN}🛠️  Running commit-msg hook...${RESET}\n"
@@ -16,11 +16,24 @@ printf "${CYAN}🛠️  Running commit-msg hook...${RESET}\n"
 commit_msg_file=$1
 commit_msg=$(cat "$commit_msg_file")
 
+# Option to skip the hook
+if echo "$commit_msg" | grep -iq "\[skip-hook\]"; then
+    printf "${YELLOW}⚠️  Skipping commit-msg hook as requested by [skip-hook] flag.${RESET}\n"
+    exit 0
+fi
+
+# Check if commit message is empty
+if [ -z "$commit_msg" ]; then
+    printf "${RED}🚫 Commit message cannot be empty. Please provide a proper commit message.${RESET}\n"
+    exit 1
+fi
+
 # Validate commit message against the pattern
 if ! echo "$commit_msg" | grep -qE "$PATTERN_STRING"; then
-    printf "${RED}🚫 Commit message does not follow the conventional format${RESET}\n"
+    printf "${RED}🚫 Commit message does not follow the conventional format.${RESET}\n"
     printf "${YELLOW}Requested pattern is: type(scope): subject${RESET}\n"
-    printf "${GREEN}Example: fix(parser): handle edge case when parsing empty strings${RESET}\n"
+    printf "Allowed types: feat, fix, build, chore, docs, style, refactor, perf, test\n"
+    printf "${GREEN}Example: feat(auth): add support for OAuth login${RESET}\n"
     exit 1
 fi
 
