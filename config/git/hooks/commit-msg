@@ -7,7 +7,7 @@ CUSTOM_HOOKS_DIR="$HOME/.config/git/hooks/scripts"
 source "$CUSTOM_HOOKS_DIR/colors.sh"
 
 # Pattern string to check for
-PATTERN_STRING="^(feat|fix|build|chore|docs|style|refactor|perf|test)(\([^)]+\))?!?: (.+[^.\r\n])([\r\n]+(.+[\r\n]+)+)?$"
+PATTERN_STRING="^(feat|fix|build|chore|docs|style|refactor|perf|test)\(.*\): (.+[^.\r\n])([\r\n]+(.+[\r\n]+)+)?$"
 
 # Output message indicating the hook is running
 printf "${CYAN}🛠️  Running commit-msg hook...${RESET}\n"
@@ -29,12 +29,27 @@ if [ -z "$commit_msg" ]; then
 fi
 
 # Validate commit message against the pattern
+
 if ! echo "$commit_msg" | grep -qE "$PATTERN_STRING"; then
     printf "${RED}🚫 Commit message does not follow the conventional format.${RESET}\n"
     printf "${YELLOW}Requested pattern is: type(scope): subject${RESET}\n"
     printf "Allowed types: feat, fix, build, chore, docs, style, refactor, perf, test\n"
     printf "${GREEN}Example: feat(auth): add support for OAuth login${RESET}\n"
-    exit 1
+
+    # Prompt the user to enter a corrected commit message, showing the existing one as a starting point
+    printf "\n${YELLOW}Please edit the commit message below (press ENTER to accept each line):${RESET}\n"
+    printf "${CYAN}Current message: ${commit_msg}${RESET}\n"
+    printf "New message: "
+    read -e -i "$commit_msg" new_commit_msg
+
+    # Check if the new commit message is valid
+    if ! echo "$new_commit_msg" | grep -qE "$PATTERN_STRING"; then
+        printf "${RED}🚫 Corrected commit message still does not follow the conventional format. Aborting commit.${RESET}\n"
+        exit 1
+    fi
+
+    # Write the corrected commit message back to the file
+    echo "$new_commit_msg" > "$commit_msg_file"
 fi
 
 # Additional check for WIP messages to prevent unfinished work from being committed
