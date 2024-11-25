@@ -3,8 +3,11 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
-# More time for git
-command_timeout = 1000
+# Timeout for commands executed by starship (in milliseconds).
+command_timeout = 2000
+
+# Timeout for starship to scan files (in milliseconds).
+scan_timeout = 500
 
 format = """
 [](color_orange)\
