@@ -18,10 +18,12 @@ source "$SCRIPT_DIR/log.sh"
 APPLICATIONS_ALL_DIR="$SCRIPT_DIR/applications/all"
 APPLICATIONS_ARCH_DIR="$SCRIPT_DIR/applications/arch"
 APPLICATIONS_DEB_DIR="$SCRIPT_DIR/applications/deb"
+APPLICATIONS_FED_DIR="$SCRIPT_DIR/applications/fedora"
 APPLICATIONS_WSL_DIR="$SCRIPT_DIR/applications/wsl"
 APPLICATIONS_GNOME_DIR_ALL="$SCRIPT_DIR/applications/gnome_all"
 APPLICATIONS_GNOME_DIR_ARCH="$SCRIPT_DIR/applications/gnome_arch"
 APPLICATIONS_GNOME_DIR_DEB="$SCRIPT_DIR/applications/gnome_deb"
+APPLICATIONS_HYPRLAND_DIR="$SCRIPT_DIR/applications/hyprland"
 APPLICATIONS_FLATPAK_DIR="$SCRIPT_DIR/applications/flatpak"
 CONFIG_DIR="$SCRIPT_DIR/config"
 
@@ -32,6 +34,7 @@ DISTRO=$(source /etc/os-release 2>/dev/null && echo $ID || {
 })
 IS_WSL=$(grep -qiE "(Microsoft|WSL)" /proc/version && echo true || echo false)
 RUNNING_GNOME=$([[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]] && echo true || echo false)
+RUNNING_HYPRLAND=$([[ "$XDG_CURRENT_DESKTOP" == *"Hyprland"* ]] && echo true || echo false)
 SHOW_DEBUG=false
 
 # Set the IS_ONLINE variable (true to check for internet, false to skip)
@@ -512,6 +515,9 @@ main() {
         ubuntu | debian)
             run_scripts_in_directory "$APPLICATIONS_DEB_DIR"
             ;;
+        fedora)
+            run_scripts_in_directory "$APPLICATIONS_FED_DIR"
+            ;;
         *)
             log "WARNING" "No specific scripts found for $DISTRO"
             ;;
@@ -540,6 +546,10 @@ main() {
             esac
 
             run_scripts_in_directory "$APPLICATIONS_FLATPAK_DIR"
+        fi
+
+        if $RUNNING_HYPRLAND; then
+            run_scripts_in_directory "$APPLICATIONS_HYPRLAND_DIR"
         fi
     fi
 

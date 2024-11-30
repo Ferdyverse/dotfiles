@@ -17,7 +17,7 @@ config.initial_cols = 100
 
 -- Font changes
 config.font_size = font_size
-config.font = wezterm.font("MonaspiceRn NF")
+config.font = wezterm.font("MonaspiceRn Nerd Font Mono")
 
 -- Changing the color scheme:
 config.color_scheme = "Dracula"
