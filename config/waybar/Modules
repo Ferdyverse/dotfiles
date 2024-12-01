@@ -316,6 +316,8 @@
 		"phone": "",
 		"portable": "",
 		"car": "",
+		"alsa_output.pci-0000_2d_00.4.iec958-stereo": "🔊",
+		"alsa_output.usb-Razer_Razer_BlackShark_V2_Pro-00.analog-stereo": "",
 		"default": [
 			"", "", "󰕾",  ""
 		],
@@ -325,7 +327,7 @@
 	},
 	"scroll-step": 5.0,
 	"on-click": "$HOME/.config/hypr/scripts/Volume.sh --toggle",
-	"on-click-right": "pavucontrol -t 3",
+	"on-click-right": "$HOME/.config/hypr/scripts/Volume.sh --switch",
 	"on-scroll-up": "$HOME/.config/hypr/scripts/Volume.sh --inc",
 	"on-scroll-down": "$HOME/.config/hypr/scripts/Volume.sh --dec",
 	"tooltip-format": "{icon} {desc} | {volume}%",
@@ -343,6 +345,8 @@
       "phone": "",
       "portable": "",
       "car": "",
+      "alsa_output.pci-0000_2d_00.4.iec958-stereo": "🔊",
+      "alsa_output.usb-Razer_Razer_BlackShark_V2_Pro-00.analog-stereo": "",
       "default": ["", "", ""]
     },
   "on-click": "pamixer --toggle-mute",

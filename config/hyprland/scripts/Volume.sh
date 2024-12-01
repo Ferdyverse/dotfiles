@@ -119,6 +119,15 @@ dec_mic_volume() {
     fi
 }
 
+# Switch Output
+switch_output() {
+    if [ "$(pactl get-default-sink)" == "alsa_output.usb-Razer_Razer_BlackShark_V2_Pro-00.analog-stereo" ]; then
+        pactl set-default-sink 58 && notify-send -e -u low -i "$(get_icon)" "Headphones active"
+    elif [ "$(pactl get-default-sink)" == "alsa_output.pci-0000_2d_00.4.iec958-stereo" ]; then
+        pactl set-default-sink 75 && notify-send -e -u low -i "$(get_icon)" "Speakers active"
+    fi
+}
+
 # Execute accordingly
 if [[ "$1" == "--get" ]]; then
     get_volume
@@ -138,6 +147,8 @@ elif [[ "$1" == "--mic-inc" ]]; then
     inc_mic_volume
 elif [[ "$1" == "--mic-dec" ]]; then
     dec_mic_volume
+elif [[ "$1" == "--switch" ]]; then
+    switch_output
 else
     get_volume
 fi
