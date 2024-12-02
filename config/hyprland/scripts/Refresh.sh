@@ -15,7 +15,7 @@ file_exists() {
 }
 
 # Kill already running processes
-_ps=(waybar rofi swaync ags)
+_ps=(rofi swaync ags)
 for _prs in "${_ps[@]}"; do
     if pidof "${_prs}" >/dev/null; then
         pkill "${_prs}"
@@ -26,8 +26,11 @@ done
 ags -q
 
 sleep 0.3
-#Restart waybar
-waybar &
+
+# Restart waybar
+# waybar &
+# Relaoding is possible without a full restart -> https://github.com/Alexays/Waybar/wiki/FAQ#how-can-i-reload-the-configuration-without-restarting-waybar
+# killall -SIGUSR2 waybar
 
 # relaunch swaync
 sleep 0.5

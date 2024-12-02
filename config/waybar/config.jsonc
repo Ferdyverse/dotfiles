@@ -5,7 +5,7 @@
         "$HOME/.config/waybar/Modules",
         "$HOME/.config/waybar/ModulesWorkspaces",
         "$HOME/.config/waybar/ModulesCustom",
-        "$HOME/.config/waybar/ModulesGroups",
+        "$HOME/.config/waybar/ModulesGroups"
     ],
     "layer": "top",
     //"mode": "dock",
@@ -20,7 +20,7 @@
     "margin-right": 8,
     "modules-left": [
         "hyprland/workspaces#rw",
-        "custom/separator#dot-line",
+        "custom/separator#border",
         "cpu",
         "custom/separator#dot-line",
         "temperature",
@@ -28,6 +28,7 @@
         "memory",
         "custom/separator#blank_3",
         "custom/cava_mviz",
+        "custom/spotify"
     ],
     "modules-center": [
         "custom/menu",
@@ -36,7 +37,7 @@
         "custom/separator#dot-line",
         "clock",
         "custom/separator#dot-line",
-        "custom/lock",
+        "custom/lock"
     ],
     "modules-right": [
         "network#speed",
@@ -46,13 +47,13 @@
         "mpris",
         "custom/separator#dot-line",
         "bluetooth",
-        "custom/separator#dot-line",
+        "custom/separator#border",
         "pulseaudio",
-        "custom/separator#dot-line",
+        "custom/separator#border",
         "pulseaudio#microphone",
         "custom/separator#dot-line",
         "keyboard-state",
-        "custom/separator#dot-line",
-        "custom/power",
+        "custom/separator#border",
+        "custom/power"
     ],
 }

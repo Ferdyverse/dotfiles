@@ -4,11 +4,10 @@
 
 # Define preferred text editor and terminal
 edit=${EDITOR:-nano}
-tty=kitty
+tty=wezterm
 
 # Paths to configuration directories
 configs="$HOME/.config/hypr/configs"
-UserConfigs="$HOME/.config/hypr/UserConfigs"
 
 # Function to display the menu options
 menu() {
@@ -33,15 +32,15 @@ main() {
 
     # Map choices to corresponding files
     case $choice in
-    1) file="$UserConfigs/ENVariables.conf" ;;
-    2) file="$UserConfigs/WindowRules.conf" ;;
-    3) file="$UserConfigs/Startup_Apps.conf" ;;
-    4) file="$UserConfigs/UserKeybinds.conf" ;;
-    5) file="$UserConfigs/Monitors.conf" ;;
-    6) file="$UserConfigs/Laptops.conf" ;;
-    7) file="$UserConfigs/UserSettings.conf" ;;
-    8) file="$UserConfigs/UserDecorAnimations.conf" ;;
-    9) file="$UserConfigs/WorkspaceRules.conf" ;;
+    1) file="$configs/ENVariables.conf" ;;
+    2) file="$configs/WindowRules.conf" ;;
+    3) file="$configs/Startup_Apps.conf" ;;
+    4) file="$configs/UserKeybinds.conf" ;;
+    5) file="$configs/Monitors.conf" ;;
+    6) file="$configs/Laptops.conf" ;;
+    7) file="$configs/UserSettings.conf" ;;
+    8) file="$configs/UserDecorAnimations.conf" ;;
+    9) file="$configs/WorkspaceRules.conf" ;;
     10) file="$configs/Settings.conf" ;;
     11) file="$configs/Keybinds.conf" ;;
     *) return ;; # Do nothing for invalid choices
