@@ -21,23 +21,17 @@ window#waybar.hidden {
 }
 
 #workspaces {
-    margin-right: 8px;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     transition: none;
-    background: #383c4a;
+    background: @color0;
 }
 
 #workspaces button {
     transition: none;
-    color: #7c818c;
+    color: @color15;
     background: transparent;
-    padding: 5px;
-    font-size: 18px;
-}
-
-#workspaces button.persistent {
-    color: #7c818c;
-    font-size: 12px;
+    padding-right: 5px;
+	padding-left: 5px;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -46,12 +40,11 @@ window#waybar.hidden {
     box-shadow: inherit;
     text-shadow: inherit;
     border-radius: inherit;
-    color: #383c4a;
-    background: #7c818c;
+    color: @color12;
 }
 
-#workspaces button.focused {
-    color: white;
+#workspaces button.active {
+    color: rgba(209, 77, 77, 0.727);
 }
 
 tooltip {
@@ -70,18 +63,26 @@ tooltip {
 	padding-bottom: 2px;
 	padding-right: 4px;
 	padding-left: 4px;
+	background: @color0;
+	border-radius: 10px;
 }
+
 .modules-center {
 	padding-top: 2px;
 	padding-bottom: 2px;
 	padding-right: 4px;
 	padding-left: 4px;
+	background: @color0;
+	border-radius: 10px;
 }
+
 .modules-left {
 	padding-top: 2px;
 	padding-bottom: 2px;
 	padding-right: 4px;
 	padding-left: 4px;
+	background: @color0;
+	border-radius: 10px;
 }
 /*-----modules indv----*/
 
@@ -124,7 +125,6 @@ tooltip {
 #custom-power,
 #custom-settings,
 #custom-spotify,
-#custom-separator,
 #custom-swaync,
 #custom-tty,
 #custom-updater,
@@ -139,11 +139,17 @@ tooltip {
 #custom-weather.showyIcyDay,
 #custom-weather.snowyIcyNight,
 #custom-weather.sunnyDay {
-	border-radius: 0px 10px 10px 0px;
 	color: @color15;
-	padding-right: 8px;
+	padding-right: 5px;
+	padding-left: 5px;
 	transition: none;
-	background: @color0;
+}
+
+#custom-separator {
+	color: @color15;
+	padding-right: 0px;
+	padding-left: 0px;
+	transition: none;
 }
 
 #mode {
@@ -167,7 +173,7 @@ tooltip {
 	color: #cc3436;
 }
 
-#pulseaudio-microphone.muted {
+#pulseaudio.source-muted {
 	color: #cc3436;
 }
 
@@ -248,8 +254,8 @@ tooltip {
 }
 
 #custom-separator.border {
-	padding-left: 16px;
-    padding-right: 16px;
+	padding-left: 8px;
+    padding-right: 8px;
     border-radius: 10px 0px 0px 10px;
     transition: none;
     color: #ffffff;

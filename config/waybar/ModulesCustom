@@ -54,7 +54,7 @@
 	},
 
 	"custom/lock": {
-		"format": "󰌾",
+		"format": "󰌾 ",
 		"on-click": "$HOME/.config/hypr/scripts/LockScreen.sh",
 		"tooltip": true,
 		"tooltip-format": "󰷛 Screen Lock"
@@ -64,7 +64,7 @@
 		"format": "<span>{}</span>",
 		"return-type": "json",
 		"max-length": 35,
-		"exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} $HOME {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+		"exec": "playerctl -a metadata --format '{\"text\": \"{{markup_escape(title)}} $HOME {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
 		"on-click-middle": "playerctl play-pause",
 		"on-click": "playerctl previous",
 		"on-click-right": "playerctl next",
@@ -78,7 +78,7 @@
 		"format": "<span>{}</span>",
 		"return-type": "json",
 		"max-length": 40,
-		"exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} $HOME {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+		"exec": "playerctl -a metadata --format '{\"text\": \"{{markup_escape(artist)}} > {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
 		"on-click": "playerctl -p spotify play-pause",
 		"scroll-step": 5.0,
 		"on-scroll-up": "playerctl -p spotify next",
@@ -90,9 +90,9 @@
 		"format" : "⏻ ",
 		"tooltip": false,
 		"menu": "on-click",
-		"menu-file": "$HOME/.config/waybar/power_menu.xml",
+		"menu-file": "/home/bergefe/.config/waybar/custom_modules/power_menu.xml",
 		"menu-actions": {
-			"shutdown": "shutdown +1 'Shutdown triggered'",
+			"shutdown": "shutdown now",
 			"reboot": "reboot",
 			"suspend": "systemctl suspend",
 			"hibernate": "systemctl hibernate"
@@ -124,13 +124,12 @@
 	"custom/updates": {
 		"exec": "bash $HOME/.config/hypr/scripts/checkupdates.sh", // <--- path to script
 		"on-click-right": "bash $HOME/.config/hypr/scripts/checkupdates.sh", // refresh on right click
-		"on-click-middle": "swaymsg exec '$term -e sudo dnf update'", // update on middle click    
 		"interval": 900, // refresh every 15 minutes
 		"return-type": "json",
 		"format": "{icon}",
 		"format-alt": "{icon} {}",
 		"format-icons": {
-			"has-updates": "", // icon when updates needed
+			"has-updates": " ", // icon when updates needed
 			"updated": "" // icon when all packages updated
 		}
     },
@@ -152,7 +151,7 @@
 		"tooltip": false
 	},
 	"custom/separator#blank": {
-		"format": "",
+		"format": " ",
 		"interval": "once",
 		"tooltip": false
 	},

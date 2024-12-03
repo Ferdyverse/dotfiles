@@ -35,7 +35,7 @@ notify_user() {
         notify-send -e -h string:x-canonical-private-synchronous:volume_notif -u low -i "$(get_icon)" "Volume: Muted"
     else
         notify-send -e -h int:value:"$(get_volume | sed 's/%//')" -h string:x-canonical-private-synchronous:volume_notif -u low -i "$(get_icon)" "Volume: $(get_volume)"
-        "$sDIR/Sounds.sh" --volume
+        # "$sDIR/Sounds.sh" --volume
     fi
 }
 
@@ -122,9 +122,9 @@ dec_mic_volume() {
 # Switch Output
 switch_output() {
     if [ "$(pactl get-default-sink)" == "alsa_output.usb-Razer_Razer_BlackShark_V2_Pro-00.analog-stereo" ]; then
-        pactl set-default-sink 58 && notify-send -e -u low -i "$(get_icon)" "Headphones active"
+        pactl set-default-sink alsa_output.pci-0000_2d_00.4.iec958-stereo && notify-send -e -u low -i "$(get_icon)" "Speakers active"
     elif [ "$(pactl get-default-sink)" == "alsa_output.pci-0000_2d_00.4.iec958-stereo" ]; then
-        pactl set-default-sink 75 && notify-send -e -u low -i "$(get_icon)" "Speakers active"
+        pactl set-default-sink alsa_output.usb-Razer_Razer_BlackShark_V2_Pro-00.analog-stereo && notify-send -e -u low -i "$(get_icon)" "Headphones active"
     fi
 }
 
