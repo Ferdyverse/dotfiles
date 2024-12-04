@@ -12,7 +12,7 @@ nvidia_pkg=(
 for NVIDIA in "${nvidia_pkg[@]}"; do
     install_package "$NVIDIA"
     if [ $? -ne 0 ]; then
-        log "ERROR" "${ERROR} - $NVIDIA Installation failed. Check the install log."
+        log "ERROR" "$NVIDIA Installation failed. Check the install log."
         exit 1
     fi
 done

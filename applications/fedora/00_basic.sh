@@ -4,7 +4,7 @@ packages=(
     bat
     neovim
     variety
-    lazygit
+    dnf-plugins-core
 )
 
 for package in "${packages[@]}"; do

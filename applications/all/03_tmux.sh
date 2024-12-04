@@ -4,3 +4,5 @@
 
 # create_symlink "$SCRIPT_DIR/repos/oh-my-tmux/.tmux.conf" "$HOME/.tmux.conf"
 # create_symlink "$SCRIPT_DIR/config/tmux/tmux.conf.local" "$HOME/.tmux.conf.local"
+
+log "CINFO" "TMUX is currently disabled due to WezTerm"
