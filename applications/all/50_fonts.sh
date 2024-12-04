@@ -1,7 +1,7 @@
 # Add custom nerd fonts
 
 # Define the system font directory
-SYSTEM_FONT_DIR="/usr/share/fonts/truetype/custom"
+SYSTEM_FONT_DIR="/usr/share/fonts"
 
 # Function to install fonts from a specified directory
 install_fonts_from_directory() {
@@ -13,14 +13,14 @@ install_fonts_from_directory() {
         exit 1
     fi
 
-    ensure_directories $SYSTEM_FONT_DIR 
+    ensure_directories $SYSTEM_FONT_DIR
 
     # Find all .ttf files in the specified directory
     local font_files=("$font_dir"/*.ttf)
     if [ ${#font_files[@]} -eq 0 ]; then
         log "ERROR" "No .ttf files found in directory $font_dir"
-        exit 1
     fi
+
 
     for font_file in "${font_files[@]}"; do
         if [ -f "$font_file" ]; then
