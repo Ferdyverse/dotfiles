@@ -30,7 +30,7 @@ sleep 0.3
 # Restart waybar
 # waybar &
 # Relaoding is possible without a full restart -> https://github.com/Alexays/Waybar/wiki/FAQ#how-can-i-reload-the-configuration-without-restarting-waybar
-# killall -SIGUSR2 waybar
+killall -SIGUSR2 waybar
 
 # relaunch swaync
 sleep 0.5

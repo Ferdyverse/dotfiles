@@ -1,0 +1,14 @@
+{
+    "custom/updates": {
+        "exec": "bash $HOME/.config/hypr/scripts/checkupdates.sh", // <--- path to script
+        "on-click-right": "bash $HOME/.config/hypr/scripts/checkupdates.sh", // refresh on right click
+        "interval": 900, // refresh every 15 minutes
+        "return-type": "json",
+        "format": "{icon}",
+        "format-alt": "{icon} {}",
+        "format-icons": {
+            "has-updates": " ", // icon when updates needed
+            "updated": "" // icon when all packages updated
+        }
+    }
+}

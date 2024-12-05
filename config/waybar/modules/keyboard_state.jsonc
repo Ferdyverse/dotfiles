@@ -1,0 +1,14 @@
+{
+    "keyboard-state": {
+        "numlock": false,
+        "capslock": true,
+        "format": {
+            "numlock": "N {icon}",
+            "capslock": "󰪛 {icon}"
+        },
+        "format-icons": {
+            "locked": " ",
+            "unlocked": " "
+        }
+    }
+}

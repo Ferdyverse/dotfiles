@@ -1,11 +1,4 @@
-/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
-// ### DEFAULT - Top ### //
 {
-    "include": [
-        "$HOME/.config/waybar/Modules",
-        "$HOME/.config/waybar/ModulesWorkspaces",
-        "$HOME/.config/waybar/ModulesCustom"
-    ],
     "layer": "top",
     //"mode": "dock",
     "exclusive": true,
@@ -49,6 +42,6 @@
         "custom/separator#dot-line",
         "keyboard-state",
         "custom/separator#dot-line",
-        "custom/power"
+        "group/power"
     ]
 }

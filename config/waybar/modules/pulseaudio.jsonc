@@ -1,0 +1,69 @@
+{
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} 󰂰 {volume}%",
+        "format-muted": "󰖁",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "alsa_output.pci-0000_2d_00.4.iec958-stereo": "🔊",
+            "alsa_output.usb-Razer_Razer_BlackShark_V2_Pro-00.analog-stereo": "",
+            "default": [
+                "",
+                "",
+                "󰕾",
+                ""
+            ],
+            "ignored-sinks": [
+                "Easy Effects Sink"
+            ]
+        },
+        "scroll-step": 5.0,
+        "on-click": "$HOME/.config/hypr/scripts/Volume.sh --toggle",
+        "on-click-right": "$HOME/.config/hypr/scripts/Volume.sh --switch",
+        "on-scroll-up": "$HOME/.config/hypr/scripts/Volume.sh --inc",
+        "on-scroll-down": "$HOME/.config/hypr/scripts/Volume.sh --dec",
+        "tooltip-format": "{icon} {desc} | {volume}%",
+        "smooth-scrolling-threshold": 1
+    },
+    "pulseaudio#1": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-bluetooth-muted": " {icon}",
+        "format-muted": "󰸈",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "alsa_output.pci-0000_2d_00.4.iec958-stereo": "🔊",
+            "alsa_output.usb-Razer_Razer_BlackShark_V2_Pro-00.analog-stereo": "",
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        },
+        "on-click": "pamixer --toggle-mute",
+        "on-click-right": "pavucontrol -t 3",
+        "tooltip": true,
+        "tooltip-format": "{icon} {desc} | {volume}%"
+    },
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "on-click": "$HOME/.config/hypr/scripts/Volume.sh --toggle-mic",
+        "on-click-right": "pavucontrol -t 4",
+        "on-scroll-up": "$HOME/.config/hypr/scripts/Volume.sh --mic-inc",
+        "on-scroll-down": "$HOME/.config/hypr/scripts/Volume.sh --mic-dec",
+        "tooltip-format": "{source_desc} | {source_volume}%",
+        "scroll-step": 5
+    }
+}
