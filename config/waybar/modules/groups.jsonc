@@ -1,14 +1,14 @@
 {
     "group/power": {
-        "orientation": "orthogonal",
+        "orientation": "inherit",
         "drawer": {
             "transition-duration": 500,
             "children-class": "power_sub",
             "transition-left-to-right": true
         },
         "modules": [
-            "custom/lock",
             "custom/shutdown",
+            "custom/lock",
             "custom/reboot",
             "custom/logout"
         ]

@@ -83,6 +83,8 @@ config.hide_tab_bar_if_only_one_tab = true
 config.show_tab_index_in_tab_bar = false
 config.tab_bar_at_bottom = true
 
+config.window_decorations = "RESIZE"
+
 -- Things for Windows
 if wezterm.target_triple:find("windows") ~= nil then
 	-- Set WLS as default on Windows

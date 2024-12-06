@@ -9,11 +9,13 @@ nvidia_pkg=(
 
 
 # Install additional Nvidia packages
-for NVIDIA in "${nvidia_pkg[@]}"; do
-    install_package "$NVIDIA"
-    if [ $? -ne 0 ]; then
-        log "ERROR" "$NVIDIA Installation failed. Check the install log."
-        exit 1
+for package in "${nvidia_pkg[@]}"; do
+    if ! is_package_installed "$package"; then
+        install_package "$package"
+        if [ $? -ne 0 ]; then
+            log "ERROR" "$package Installation failed. Check the install log."
+            exit 1
+        fi
     fi
 done
 
@@ -24,11 +26,11 @@ additional_options="rd.driver.blacklist=nouveau modprobe.blacklist=nouveau nvidi
 
 # Check if additional options are already present in GRUB_CMDLINE_LINUX
 if grep -q "GRUB_CMDLINE_LINUX.*$additional_options" /etc/default/grub; then
-    echo "GRUB_CMDLINE_LINUX already contains the additional options" 2>&1 | tee -a "$LOG"
+    echo "GRUB_CMDLINE_LINUX already contains the additional options"
 else
     # Append the additional options to GRUB_CMDLINE_LINUX
     sudo sed -i "s/GRUB_CMDLINE_LINUX=\"/GRUB_CMDLINE_LINUX=\"$additional_options /" /etc/default/grub
-    echo "Added the additional options to GRUB_CMDLINE_LINUX" 2>&1 | tee -a "$LOG"
+    echo "Added the additional options to GRUB_CMDLINE_LINUX"
 fi
 
 # Update GRUB configuration

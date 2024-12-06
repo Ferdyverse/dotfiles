@@ -554,6 +554,8 @@ main() {
 
         if $RUNNING_HYPRLAND; then
             run_scripts_in_directory "$APPLICATIONS_HYPRLAND_DIR"
+
+            run_scripts_in_directory "$APPLICATIONS_FLATPAK_DIR"
         fi
     fi
 

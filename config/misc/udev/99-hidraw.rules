@@ -1,0 +1,2 @@
+# Espressif USB JTAG/serial debug units
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0666"
