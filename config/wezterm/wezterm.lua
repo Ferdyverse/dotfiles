@@ -5,6 +5,9 @@ local hostname = wezterm.hostname()
 local config = wezterm.config_builder()
 local act = wezterm.action
 
+-- Wayland fix --
+config.enable_wayland = false
+
 -- Settings based on the PC
 local font_size = 11.0
 if string.find(hostname, "deagm") or string.find(hostname, "mate") then
@@ -82,8 +85,6 @@ config.enable_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = true
 config.show_tab_index_in_tab_bar = false
 config.tab_bar_at_bottom = true
-
-config.window_decorations = "RESIZE"
 
 -- Things for Windows
 if wezterm.target_triple:find("windows") ~= nil then
