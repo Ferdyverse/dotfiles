@@ -28,7 +28,9 @@
         "custom/separator#dot-line",
         "idle_inhibitor",
         "custom/separator#dot-line",
-        "clock"
+        "clock",
+        "custom/separator#dot-line",
+        "custom/yubikey"
     ],
     "modules-right": [
         "network#speed",

@@ -1,0 +1,6 @@
+{
+    "custom/yubikey": {
+        "exec": "$HOME/.config/hypr/scripts/waybar_yubikey.sh",
+        "return-type": "json"
+    }
+}
