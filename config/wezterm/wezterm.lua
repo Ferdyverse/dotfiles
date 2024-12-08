@@ -11,7 +11,7 @@ config.enable_wayland = false
 -- Settings based on the PC
 local font_size = 11.0
 if string.find(hostname, "deagm") or string.find(hostname, "mate") then
-	font_size = 12.0
+	font_size = 10.0
 end
 
 -- Term size changes
