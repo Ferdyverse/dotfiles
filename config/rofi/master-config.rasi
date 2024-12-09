@@ -79,7 +79,7 @@ inputbar {
 entry {
     enabled:                     true;
     expand:                      false;
-    width:                       20%;
+    width:                       100%;
     padding:                     10px;
     border-radius:               12px;
     background-color:            @selected;
@@ -91,17 +91,17 @@ entry {
 
 /* ---- Listbox ---- */
 listbox {
-    spacing:                     10px;
-    padding:                     10px;
+    spacing:                     1px;
+    padding:                     1px;
     background-color:            transparent;
-    orientation:                 vertical;
+    orientation:                 horizontal;
     children:                    [ "message", "listview" ];
 }
 
 /* ---- Listview ---- */
 listview {
     enabled:                     true;
-    columns:                     2;
+    columns:                     1;
     lines:                       6;
     cycle:                       true;
     dynamic:                     true;
@@ -154,9 +154,9 @@ scrollbar {
 /* ---- Elements ---- */
 element {
     enabled:                     true;
-    spacing:                     10px;
-    padding:                     10px;
-    border-radius:               12px;
+    spacing:                     1px;
+    padding:                     1px;
+    border-radius:               1px;
     background-color:            transparent;
     cursor:                      pointer;
 }
