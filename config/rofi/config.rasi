@@ -10,12 +10,12 @@ configuration {
 
 /* ---- Window ---- */
 window {
-    width:	20%;
+    width:	60%;
 }
 /* ---- Listview ---- */
 listview {
-  columns: 4;
-  lines: 2;
+  columns: 6;
+  lines: 4;
   fixed-height:	true;
 }
 

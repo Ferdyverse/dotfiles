@@ -49,7 +49,7 @@ window {
     anchor:                     center;
 
     // Style Values
-    width:                      20%;
+    width:                      50%;
     background-color:           @background;
 }
 

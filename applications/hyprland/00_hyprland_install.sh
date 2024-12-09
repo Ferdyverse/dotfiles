@@ -20,8 +20,6 @@ packages=(
     sddm
     pamixer
     pavucontrol
-    grim
-    slurp
 )
 
 create_symlink "$SCRIPT_DIR/config/hyprland" "$HOME/.config/hypr"
