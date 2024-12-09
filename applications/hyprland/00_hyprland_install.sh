@@ -22,6 +22,7 @@ packages=(
     pavucontrol
     grim
     slurp
+    thunar
 )
 
 create_symlink "$SCRIPT_DIR/config/hyprland" "$HOME/.config/hypr"
