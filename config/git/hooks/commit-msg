@@ -28,6 +28,10 @@ if [ -z "$commit_msg" ]; then
     exit 1
 fi
 
+if echo "$commit_msg" | grep -qE "merge"; then
+    exit 0
+fi
+
 # Validate commit message against the pattern
 
 if ! echo "$commit_msg" | grep -qE "$PATTERN_STRING"; then
@@ -49,7 +53,7 @@ if ! echo "$commit_msg" | grep -qE "$PATTERN_STRING"; then
     fi
 
     # Write the corrected commit message back to the file
-    echo "$new_commit_msg" > "$commit_msg_file"
+    echo "$new_commit_msg" >"$commit_msg_file"
 fi
 
 # Additional check for WIP messages to prevent unfinished work from being committed
