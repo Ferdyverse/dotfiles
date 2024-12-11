@@ -92,8 +92,16 @@ source $HOME/.custom_env
 # Add to .local/bin to path
 path+=('/home/bergefe/.local/bin')
 path+=('/home/bergefe/.cargo/bin')
+path+=('/home/bergefe/.bun/bin')
 # export to sub-processes (make it inherited by child processes)
 export PATH
 
 # Enable starship
 eval "$(starship init zsh)"
+
+# bun completions
+[ -s "/home/bergefe/.bun/_bun" ] && source "/home/bergefe/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
