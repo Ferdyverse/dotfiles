@@ -1,0 +1,112 @@
+{
+  "bar.customModules.updates.pollingInterval": 1440000,
+  "theme.font.name": "MonaspiceRn Nerd Font Mono",
+  "theme.bar.floating": true,
+  "theme.bar.buttons.enableBorders": false,
+  "theme.bar.buttons.modules.ram.enableBorder": false,
+  "bar.layouts": {
+    "0": {
+      "left": [
+        "workspaces"
+      ],
+      "middle": [
+        "clock"
+      ],
+      "right": [
+        "ram",
+        "cpu",
+        "cputemp",
+        "notifications"
+      ]
+    },
+    "1": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "ram",
+        "cpu",
+        "cputemp"
+      ],
+      "middle": [
+        "clock"
+      ],
+      "right": [
+        "systray",
+        "volume",
+        "network",
+        "bluetooth",
+        "battery",
+        "notifications"
+      ]
+    },
+    "2": {
+      "left": [
+        "workspaces"
+      ],
+      "middle": [
+        "clock"
+      ],
+      "right": [
+        "ram",
+        "cpu",
+        "cputemp",
+        "notifications"
+      ]
+    }
+  },
+  "scalingPriority": "hyprland",
+  "app_icon_mappings": {
+    "[dD]iscord": "󰙯",
+    "title:YouTube": "",
+    "class:wezterm$": ""
+  },
+  "menus.clock.time.hideSeconds": true,
+  "menus.clock.weather.enabled": false,
+  "menus.dashboard.shortcuts.left.shortcut3.command": "vesktop",
+  "menus.dashboard.shortcuts.left.shortcut3.tooltip": "Vesktop",
+  "menus.dashboard.directories.enabled": false,
+  "menus.dashboard.shortcuts.enabled": true,
+  "bar.workspaces.show_numbered": false,
+  "bar.workspaces.showApplicationIcons": true,
+  "bar.workspaces.showWsIcons": true,
+  "bar.workspaces.ignored": "",
+  "bar.workspaces.applicationIconOncePerWorkspace": true,
+  "theme.bar.buttons.workspaces.smartHighlight": false,
+  "bar.workspaces.workspaces": 10,
+  "bar.workspaces.monitorSpecific": false,
+  "bar.workspaces.hideUnoccupied": false,
+  "bar.workspaces.workspaceMask": false,
+  "bar.workspaces.applicationIconMap": {
+    "class:wezterm$": "",
+    "title:YouTube": "",
+    "title:Amazon>": "",
+    "title:Reddit": "",
+    "class:Vivaldi-stable$": "",
+    "class:code": "󰨞",
+    "class:thunar": "󰝰",
+    "class:vesktop": "",
+    "class:obsidian": "",
+    "class:steam": ""
+  },
+  "bar.launcher.autoDetectIcon": true,
+  "theme.bar.buttons.dashboard.enableBorder": false,
+  "theme.bar.buttons.workspaces.enableBorder": false,
+  "bar.windowtitle.custom_title": false,
+  "bar.windowtitle.class_name": false,
+  "bar.clock.format": "%H:%M",
+  "theme.osd.monitor": 1,
+  "menus.clock.time.military": true,
+  "bar.customModules.cpuTemp.sensor": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon2/temp1_input",
+  "theme.bar.border.location": "none",
+  "theme.bar.transparent": true,
+  "theme.bar.buttons.background_opacity": 70,
+  "theme.bar.buttons.monochrome": false,
+  "theme.matugen": true,
+  "wallpaper.enable": true,
+  "wallpaper.image": "/home/bergefe/.config/hypr/wallpaper_effects/.wallpaper_current",
+  "theme.matugen_settings.mode": "dark",
+  "theme.matugen_settings.scheme_type": "fidelity",
+  "theme.matugen_settings.variation": "standard_1",
+  "bar.customModules.ram.labelType": "percentage",
+  "theme.bar.menus.menu.dashboard.scaling": 80
+}
