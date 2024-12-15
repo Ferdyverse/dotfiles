@@ -20,12 +20,16 @@ APPLICATIONS_ARCH_DIR="$SCRIPT_DIR/applications/arch"
 APPLICATIONS_DEB_DIR="$SCRIPT_DIR/applications/deb"
 APPLICATIONS_FED_DIR="$SCRIPT_DIR/applications/fedora"
 APPLICATIONS_WSL_DIR="$SCRIPT_DIR/applications/wsl"
+
+# Desktop features
 APPLICATIONS_GNOME_DIR_ALL="$SCRIPT_DIR/applications/gnome_all"
 APPLICATIONS_GNOME_DIR_ARCH="$SCRIPT_DIR/applications/gnome_arch"
 APPLICATIONS_GNOME_DIR_DEB="$SCRIPT_DIR/applications/gnome_deb"
 APPLICATIONS_GNOME_DIR_FEDORA="$SCRIPT_DIR/applications/gnome_fedora"
 APPLICATIONS_HYPRLAND_DIR="$SCRIPT_DIR/applications/hyprland"
 APPLICATIONS_FLATPAK_DIR="$SCRIPT_DIR/applications/flatpak"
+
+# Base config dir
 CONFIG_DIR="$SCRIPT_DIR/config"
 
 # Determine distribution and environment
@@ -541,7 +545,7 @@ main() {
             ubuntu | debian)
                 un_scripts_in_directory "$APPLICATIONS_GNOME_DIR_DEB"
                 ;;
-			fedora)
+            fedora)
                 run_scripts_in_directory "$APPLICATIONS_GNOME_DIR_FEDORA"
                 ;;
             *)
