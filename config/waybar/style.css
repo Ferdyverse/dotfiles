@@ -7,6 +7,7 @@
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: Liberation Mono;
     min-height: 20px;
+	font-size: 18px;
 }
 
 @import '../../.config/waybar/wallust/colors-waybar.css';
@@ -23,7 +24,7 @@ window#waybar.hidden {
 #workspaces {
     /*border-radius: 10px;*/
     transition: none;
-    background: @color0;
+    background: @color1;
 }
 
 #workspaces button {
@@ -63,7 +64,7 @@ tooltip {
 	padding-bottom: 2px;
 	padding-right: 4px;
 	padding-left: 4px;
-	background: @color0;
+	background: @color1;
 	border-radius: 10px;
 }
 
@@ -72,7 +73,7 @@ tooltip {
 	padding-bottom: 2px;
 	padding-right: 4px;
 	padding-left: 4px;
-	background: @color0;
+	background: @color1;
 	border-radius: 10px;
 }
 
@@ -81,7 +82,7 @@ tooltip {
 	padding-bottom: 2px;
 	padding-right: 4px;
 	padding-left: 4px;
-	background: @color0;
+	background: @color1;
 	border-radius: 10px;
 }
 /*-----modules indv----*/
