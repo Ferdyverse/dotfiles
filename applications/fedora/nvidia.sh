@@ -7,6 +7,11 @@ nvidia_pkg=(
     libva-nvidia-driver
 )
 
+nvidia_services=(
+    nvidia-suspend.service
+    nvidia-hibernate.service
+    nvidia-resume.service
+)
 
 # Install additional Nvidia packages
 for package in "${nvidia_pkg[@]}"; do
@@ -35,5 +40,13 @@ fi
 
 # Update GRUB configuration
 sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+
+for service in "${nvidia_services[@]}"; do
+    sudo systemctl enable "$service"
+    if [ $? -ne 0 ]; then
+        log "ERROR" "$service could not be activated. Check the install log."
+        exit 1
+    fi
+done
 
 log "CINFO" "Nvidia DRM modeset and additional options have been added to /etc/default/grub. Please reboot for changes to take effect."
