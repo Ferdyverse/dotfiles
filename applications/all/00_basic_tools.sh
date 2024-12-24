@@ -12,6 +12,7 @@ packages=(
     unzip
     xclip
     whiptail
+    direnv
 )
 
 for package in "${packages[@]}"; do
