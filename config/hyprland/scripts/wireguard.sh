@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-SERVICE_NAME="wg-quick@wg0"
+SERVICE_NAME="wg-quick@wgmate"
 STATUS_CONNECTED_STR='{"text":"Connected","class":"connected","alt":"connected"}'
 STATUS_DISCONNECTED_STR='{"text":"Disconnected","class":"disconnected","alt":"disconnected"}'
 
 function askpass() {
-  rofi -dmenu -password -no-fixed-num-lines -p "Sudo password : "
+    rofi -dmenu -password -p "Enter sudo password: "
 }
 
 function status_wireguard() {
@@ -15,8 +15,8 @@ function status_wireguard() {
 
 function toggle_wireguard() {
   status_wireguard && \
-     SUDO_ASKPASS=~/.config/waybar/wireguard-manager/wireguard-manager.sh sudo -A systemctl stop $SERVICE_NAME || \
-     SUDO_ASKPASS=~/.config/waybar/wireguard-manager/wireguard-manager.sh sudo -A systemctl start $SERVICE_NAME
+     SUDO_ASKPASS=~/.config/hypr/scripts/wireguard.sh sudo -A systemctl stop $SERVICE_NAME || \
+     SUDO_ASKPASS=~/.config/hypr/scripts/wireguard.sh sudo -A systemctl start $SERVICE_NAME
 }
 
 case $1 in

@@ -1,5 +1,5 @@
 {
-    "custom/wireguard-manager": {
+    "custom/wireguard": {
         "interval": 3,
         "return-type": "json",
         "format-icons": {
