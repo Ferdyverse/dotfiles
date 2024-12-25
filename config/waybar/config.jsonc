@@ -37,8 +37,6 @@
             "custom/yubikey"
         ],
         "modules-right": [
-            "network#speed",
-            "custom/separator#dot-line",
             "custom/swaync",
             "tray",
             "custom/separator#dot-line",

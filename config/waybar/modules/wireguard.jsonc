@@ -3,11 +3,11 @@
         "interval": 3,
         "return-type": "json",
         "format-icons": {
-            "connected": "<span color=\"#50fa7b\">VPN: 🔒</span>",
-            "disconnected": "<span color=\"#ff5555\">VPN: 🔓</span>"
+            "connected": "<span color=\"#50fa7b\">VPN: </span>",
+            "disconnected": "<span color=\"#ff5555\">VPN: </span>"
         },
         "on-click": "$HOME/.config/hypr/scripts/wireguard.sh -t",
         "exec": "$HOME/.config/hypr/scripts/wireguard.sh -s",
         "format": "{icon}"
-        }
+    }
 }
