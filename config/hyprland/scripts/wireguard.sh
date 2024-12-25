@@ -5,7 +5,7 @@ STATUS_CONNECTED_STR='{"text":"Connected","class":"connected","alt":"connected"}
 STATUS_DISCONNECTED_STR='{"text":"Disconnected","class":"disconnected","alt":"disconnected"}'
 
 function askpass() {
-    rofi -dmenu -password -p "Enter sudo password: "
+  rofi -dmenu -password -p "Enter sudo password: "
 }
 
 function status_wireguard() {
@@ -14,19 +14,21 @@ function status_wireguard() {
 }
 
 function toggle_wireguard() {
-  status_wireguard && \
-     SUDO_ASKPASS=~/.config/hypr/scripts/wireguard.sh sudo -A systemctl stop $SERVICE_NAME || \
-     SUDO_ASKPASS=~/.config/hypr/scripts/wireguard.sh sudo -A systemctl start $SERVICE_NAME
+  if [status_wireguard -eq 0]; then
+    SUDO_ASKPASS=~/.config/hypr/scripts/wireguard.sh sudo -A systemctl stop $SERVICE_NAME && notify-send -e -u low "WireGuard disabled!"
+  else
+    SUDO_ASKPASS=~/.config/hypr/scripts/wireguard.sh sudo -A systemctl start $SERVICE_NAME && notify-send -e -u low "WireGuard enabled!"
+  fi
 }
 
 case $1 in
-  -s | --status)
-    status_wireguard && echo $STATUS_CONNECTED_STR || echo $STATUS_DISCONNECTED_STR
-    ;;
-  -t | --toggle)
-    toggle_wireguard
-    ;;
-  *)
-    askpass
-    ;;
+-s | --status)
+  status_wireguard && echo $STATUS_CONNECTED_STR || echo $STATUS_DISCONNECTED_STR
+  ;;
+-t | --toggle)
+  toggle_wireguard
+  ;;
+*)
+  askpass
+  ;;
 esac
