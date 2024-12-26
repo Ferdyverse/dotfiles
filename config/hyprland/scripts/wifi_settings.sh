@@ -15,7 +15,7 @@ ssid=$(echo "$chosen_network" | sed 's/ (.*)//')
 # Prompt for password if network is secured
 security=$(nmcli -t -f SSID,SECURITY dev wifi | grep "^$ssid:" | cut -d':' -f2)
 if [[ "$security" != "--" ]]; then
-    password=$(rofi -dmenu -password -p "Enter Password for $ssid:")
+    password=$(rofi -dmenu -theme $HOME/.config/rofi/wireguard.rasi -password -p "Enter Password for $ssid:")
     [ -z "$password" ] && exit 1
 fi
 
