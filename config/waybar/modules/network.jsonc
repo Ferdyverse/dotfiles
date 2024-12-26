@@ -17,7 +17,7 @@
             "󰤥",
             "󰤨"
         ],
-        "on-click-right": "kitty nmtui"
+        "on-click-right": "$HOME/.config/hypr/scripts/wifi_settings.sh"
     },
     "network#speed": {
         "interval": 1,
