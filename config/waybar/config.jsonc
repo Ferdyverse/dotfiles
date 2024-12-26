@@ -139,8 +139,6 @@
             "custom/yubikey"
         ],
         "modules-right": [
-            "network#speed",
-            "custom/separator#dot-line",
             "custom/wireguard",
             "custom/separator#dot-line",
             "custom/swaync",
