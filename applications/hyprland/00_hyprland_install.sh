@@ -4,7 +4,7 @@ copr_pkgs=(
   erikreider/SwayNotificationCenter
 )
 
-packages=(
+packages_fedora=(
   hyprland
   kitty
   hyprlock
@@ -25,21 +25,60 @@ packages=(
   thunar
 )
 
+packages_arch=(
+  hyprland
+  waybar
+  rofi-wayland
+  dunst
+  hyprpaper
+  hyprlock
+  hypridle
+  xdg-desktop-portal-hyprland
+  sddm
+  kitty
+  qt5-wayland
+  qt6-wayland
+  cliphist
+  thunar
+  thunar-volman
+  thunar-archive-plugin
+  network-manager-applet
+  blueman
+  brightnessctl
+  slurp
+  grim
+  xclip
+  swappy
+  gnome-themes-extra
+  gtk-engine-murrine
+  nwg-look
+)
+
 sddm_conf_dir=/etc/sddm.conf.d
 
 create_symlink "$SCRIPT_DIR/config/hyprland" "$HOME/.config/hypr"
 
-for pkg in "${copr_pkgs[@]}"; do
-  sudo dnf copr enable -y "$pkg"
-done
+if [$DISTRO -eq "fedora"]; then
+  for pkg in "${copr_pkgs[@]}"; do
+    sudo dnf copr enable -y "$pkg"
+  done
 
-dnf check-update
+  dnf check-update
 
-for package in "${packages[@]}"; do
-  if ! is_package_installed "$package"; then
-    install_package "$package"
-  fi
-done
+  for package in "${packages_fedora[@]}"; do
+    if ! is_package_installed "$package"; then
+      install_package "$package"
+    fi
+  done
+fi
+
+if [$DISTRO -eq "manjaro" || "arch"]; then
+  for package in "${packages_arch[@]}"; do
+    if ! is_package_installed "$package"; then
+      install_package "$package"
+    fi
+  done
+fi
 
 log "INFO" "Starting SDDM config"
 ensure_directories "/usr/share/sddm/themes/"
