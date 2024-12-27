@@ -65,7 +65,7 @@ Place your custom `.sh` scripts in the appropriate directory based on where they
 To control the execution order and behavior of your scripts, adhere to the following naming conventions:
 
 - **Prefix with Numbers:** Prefix your script filenames with numbers to define the order in which they should run. For example, `01_install_vim.sh`, `02_setup_git.sh`, etc.
-  
+
 - **Script Description:** Optionally, include a brief description after the numbering for clarity. For example, `50_customize_shell.sh`.
 
 ### Script Structure
@@ -135,7 +135,7 @@ log "INFO" "TMUX done"
 
 ### Best Practices
 - **Idempotency:** Ensure that your scripts can be run multiple times without causing unintended side effects. For example, check if a package is already installed before attempting to install it.
-  
+
 - **Error Handling:** Incorporate error checking after critical commands to handle failures gracefully. Use the provided `log` functions to report success or errors.
 
 - **Modularity:** Keep scripts focused on a single task or related set of tasks. This makes them easier to manage and debug.

@@ -28,7 +28,7 @@ source /etc/os-release
 
 # Replace ls with exa
 if which eza >/dev/null; then
-	alias ls="eza --icons -a --group-directories-first"	
+	alias ls="eza --icons -a --group-directories-first"
 fi
 
 if [[ \$ID == fedora ]]; then
@@ -41,12 +41,12 @@ fi
 
 # General linux
 if [[ \$OSTYPE == linux* ]]; then
-	
+
 	# cat to batcat
 	if which bat >/dev/null; then
 		alias cat="bat"
 	fi
-	
+
 	# WSL
 	if uname -r | grep -q "microsoft"; then
 		alias src="cd /mnt/c/src/"
@@ -68,15 +68,15 @@ fi
 
 # macOS aliasses
 if [[ \$OSTYPE == darwin* ]]; then
-	
+
 	# cat to batcat
 	if which bat >/dev/null; then
 		alias cat="bat"
 	fi
-	
+
 	# Tailing test with batcat
 	alias btail="tail -f \$@ | bat --paging=never -l log"
-	
+
 	# Update dotfiles
 	alias dotfiles="export org=\$PWD; cd \$HOME/.dotfiles/; ./install; cd \$org"
 fi

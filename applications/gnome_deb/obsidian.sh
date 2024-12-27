@@ -4,5 +4,5 @@ if ! is_package_installed "obsidian"; then
     wget -L $release_url -O obsidian.deb
     sudo apt-get -qq install -y ./obsidian.deb
     rm obsidian.deb
-    cd - 
+    cd -
 fi

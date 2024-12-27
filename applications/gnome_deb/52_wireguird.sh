@@ -6,5 +6,5 @@ if ! is_package_installed "wireguird"; then
     sudo apt-get -qq install -y ./wireguird_amd64.deb
     rm wireguird_amd64.deb
 
-    cd - 
+    cd -
 fi

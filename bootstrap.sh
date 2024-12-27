@@ -80,7 +80,7 @@ install_package() {
     case "$DISTRO" in
     ubuntu | debian) cmd="sudo apt-get install -qq -y $package" ;;
     fedora) cmd="sudo dnf install -y $package" ;;
-    arch) cmd="sudo pacman -Syu --noconfirm $package" ;;
+    arch | endeavouros) cmd="sudo pacman -Syu --noconfirm $package" ;;
     manjaro) cmd="sudo pamac install --no-confirm $package" ;;
     *)
         log "ERROR" "Unsupported distribution: $DISTRO"
@@ -96,7 +96,7 @@ update_cache() {
     case "$DISTRO" in
     ubuntu | debian) cmd="sudo apt-get -qq update" ;;
     fedora) cmd="sudo dnf makecache" ;;
-    arch) cmd="sudo pacman -Syy" ;;
+    arch | endeavouros) cmd="sudo pacman -Syy" ;;
     manjaro) cmd="sudo pamac update" ;;
     *)
         log "ERROR" "Unsupported distribution: $DISTRO"
@@ -112,7 +112,7 @@ system_upgrade() {
     case "$DISTRO" in
     ubuntu | debian) sudo apt-get update -qq && sudo apt-get upgrade -qq -y ;;
     fedora) sudo dnf upgrade -y ;;
-    arch | manjaro) sudo pacman -Syu --noconfirm ;;
+    arch | manjaro | endeavouros) sudo pacman -Syu --noconfirm ;;
     manjaro) sudo pamac upgrade --no-confirm ;;
     *)
         log "ERROR" "Unsupported distro: $DISTRO"
@@ -130,7 +130,7 @@ is_package_installed() {
     case "$DISTRO" in
     ubuntu | debian) dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -q "install ok installed" ;;
     fedora) rpm -q "$package" &>/dev/null ;;
-    arch | manjaro) pacman -Q "$package" &>/dev/null ;;
+    arch | manjaro | endeavouros) pacman -Q "$package" &>/dev/null ;;
     *)
         log "ERROR" "Unsupported distribution: $DISTRO"
         return 1
@@ -514,7 +514,7 @@ main() {
 
         # Install distribution-specific applications
         case "$DISTRO" in
-        arch | manjaro)
+        arch | manjaro | endeavouros)
             run_scripts_in_directory "$APPLICATIONS_ARCH_DIR"
             ;;
         ubuntu | debian)
@@ -539,7 +539,7 @@ main() {
             run_scripts_in_directory "$APPLICATIONS_GNOME_DIR_ALL"
 
             case "$DISTRO" in
-            arch | manjaro)
+            arch | manjaro | endeavouros)
                 run_scripts_in_directory "$APPLICATIONS_GNOME_DIR_ARCH"
                 ;;
             ubuntu | debian)

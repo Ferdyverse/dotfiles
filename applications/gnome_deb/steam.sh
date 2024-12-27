@@ -5,5 +5,5 @@ if ! is_package_installed "steam-launcher"; then
     update_cache
     sudo apt-get -qq install -y ./steam.deb
     rm steam.deb
-    cd - 
+    cd -
 fi
