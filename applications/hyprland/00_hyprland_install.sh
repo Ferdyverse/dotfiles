@@ -29,7 +29,7 @@ packages_arch=(
     hyprland
     waybar
     rofi-wayland
-    dunst
+    swaync
     hyprpaper
     hyprlock
     hypridle
@@ -52,6 +52,7 @@ packages_arch=(
     gnome-themes-extra
     gtk-engine-murrine
     nwg-look
+    swww-git
 )
 
 sddm_conf_dir=/etc/sddm.conf.d
