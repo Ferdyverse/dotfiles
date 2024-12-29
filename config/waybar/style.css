@@ -100,6 +100,16 @@ window#waybar.hidden {
 	margin: 0px;
 }
 
+#workspaces button,
+#workspaces button:hover,
+#workspaces button.visible,
+#workspaces button.visible:hover,
+#workspaces button.active,
+#workspaces button.active:hover,
+#workspaces button.urgent {
+	margin: 5px 3px;
+}
+
 #workspaces button {
 	color: #fff4d2;
 	padding: 0 4px;
