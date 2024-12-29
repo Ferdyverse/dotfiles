@@ -12,12 +12,12 @@
 			"warning": 30,
 			"critical": 15
 		},
-		"format": "{icon} {capacity}%",
-		"format-charging": " {capacity}%",
-		"format-plugged": "󱘖 {capacity}%",
+		"format": "<span color='#202020' bgcolor='#689d6a'> {icon} </span> {capacity}%",
+		"format-charging": "<span color='#202020' bgcolor='#689d6a'>  </span> {capacity}%",
+		"format-plugged": "<span color='#202020' bgcolor='#689d6a'> 󱘖 </span> {capacity}%",
 		"format-alt-click": "click",
-		"format-full": "{icon} Full",
-		"format-alt": "{icon} {time}",
+		"format-full": "<span color='#202020' bgcolor='#689d6a'> {icon} </span> Full",
+		"format-alt": "<span color='#202020' bgcolor='#689d6a'> {icon} </span> {time}",
 		"format-icons": [
 			"󰂎",
 			"󰁺",
@@ -33,8 +33,6 @@
 		],
 		"format-time": "{H}h {M}min",
 		"tooltip": true,
-		"tooltip-format": "{timeTo} {power}w",
-		"on-click-middle": "$HOME/.config/hypr/scripts/ChangeBlur.sh",
-		"on-click-right": "$HOME/.config/hypr/scripts/Wlogout.sh"
+		"tooltip-format": "{timeTo} {power}w"
 	}
 }
