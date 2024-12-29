@@ -37,7 +37,7 @@
             "pulseaudio",
             "pulseaudio#microphone",
             "keyboard-state",
-            "group/power"
+            "custom/power"
         ]
     },
     {
@@ -117,7 +117,7 @@
             "pulseaudio",
             "pulseaudio#microphone",
             "battery",
-            "group/power"
+            "custom/power"
         ]
     }
 ]

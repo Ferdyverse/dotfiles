@@ -1,6 +1,11 @@
 {
     "custom/power": {
-        "format": "⏻ ",
+        "format": "<span color='#202020' bgcolor='#d3869b'> ⏻ </span>",
+        "tooltip": false,
+        "on-click": "wlogout --margin 450 --column-spacing 100px --row-spacing 100px"
+    },
+    "custom/power2": {
+        "format": "<span color='#202020' bgcolor='#d3869b'> ⏻ </span>",
         "tooltip": false,
         "menu": "on-click",
         "menu-file": "/home/bergefe/.config/waybar/custom_modules/power_menu.xml",
@@ -12,25 +17,25 @@
         }
     },
     "custom/shutdown": {
-        "format": "⏻ ",
+        "format": " ⏻ ",
         "tooltip": true,
         "tooltip-format": "Shutdown",
         "on-click": "shutdown now"
     },
     "custom/reboot": {
-        "format": " ",
+        "format": "  ",
         "tooltip": true,
         "tooltip-format": "Restart",
         "on-click": "reboot"
     },
     "custom/suspend": {
-        "format": "⏻ ",
+        "format": " ⏻ ",
         "tooltip": true,
         "tooltip-format": "Standby",
         "on-click": "systemctl suspend"
     },
     "custom/hibernate": {
-        "format": " ",
+        "format": "  ",
         "tooltip": true,
         "tooltip-format": "Hibernate",
         "on-click": "systemctl hibernate"

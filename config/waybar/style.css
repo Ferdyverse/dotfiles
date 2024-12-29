@@ -55,6 +55,8 @@ window#waybar.hidden {
 #idle_inhibitor,
 #custom-swaync,
 #keyboard-state,
+#power,
+#custom-power,
 #clock {
 	font-family: JetBrainsMono Nerd Font Propo;
 	font-size: 18px;
@@ -81,6 +83,7 @@ window#waybar.hidden {
 #battery.warning,
 #custom-swaync,
 #keyboard-state,
+#power,
 #clock {
 	padding-right: 4px;
 }
@@ -231,4 +234,9 @@ window#waybar.hidden {
 #custom-swaync {
 	color: #8ec07c;
 	min-width: 20px;
+}
+
+#power,
+#custom-power {
+	color: #d3869b;
 }
