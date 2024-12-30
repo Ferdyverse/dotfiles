@@ -57,6 +57,7 @@ window#waybar.hidden {
 #keyboard-state,
 #power,
 #custom-power,
+#custom-yubikey,
 #clock {
 	font-family: JetBrainsMono Nerd Font Propo;
 	font-size: 18px;
@@ -249,4 +250,20 @@ window#waybar.hidden {
 #power,
 #custom-power {
 	color: #d3869b;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#custom-yubikey {
+	color: #e78a4e;
+	animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
