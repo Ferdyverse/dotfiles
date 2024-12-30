@@ -58,6 +58,7 @@ window#waybar.hidden {
 #power,
 #custom-power,
 #custom-yubikey,
+#custom-updates,
 #clock {
 	font-family: JetBrainsMono Nerd Font Propo;
 	font-size: 18px;
@@ -83,6 +84,7 @@ window#waybar.hidden {
 #battery.critical,
 #battery.warning,
 #custom-swaync,
+#custom-updates,
 #keyboard-state,
 #power,
 #clock {
@@ -266,4 +268,8 @@ window#waybar.hidden {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+
+#custom-updates {
+	color: #928374;
 }
