@@ -33,6 +33,7 @@
         "/home/bergefe/.config/waybar/modules/wireguard.jsonc",
         "/home/bergefe/.config/waybar/modules/workspaces.jsonc",
         "/home/bergefe/.config/waybar/modules/yubikey.jsonc",
-        "/home/bergefe/.config/waybar/modules/updates.jsonc"
+        "/home/bergefe/.config/waybar/modules/updates.jsonc",
+        "/home/bergefe/.config/waybar/modules/usbguard.jsonc"
     ]
 }
