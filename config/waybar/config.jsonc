@@ -100,7 +100,7 @@
             "hyprland/workspaces",
             "cpu",
             "temperature",
-            "memory",
+            "memory"
         ],
         "modules-center": [
             "custom/menu",

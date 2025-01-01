@@ -16,10 +16,10 @@ for package in "${packages[@]}"; do
     fi
 done
 
-if [$DISTRO -eq "manjaro"]; then
-    # Enable third party packages
-    create_symlink "$SCRIPT_DIR/config/misc/pamac/pamac.conf" "/etc/pamac.conf"
-fi
+#if ["$DISTRO" == "manjaro"]; then
+#    # Enable third party packages
+#    create_symlink "$SCRIPT_DIR/config/misc/pamac/pamac.conf" "/etc/pamac.conf"
+#fi
 
 # make yay faster - do not use compression
 sudo sed -i "s/PKGEXT=.*/PKGEXT='.pkg.tar'/g" /etc/makepkg.conf
