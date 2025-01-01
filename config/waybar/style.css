@@ -56,11 +56,9 @@ window#waybar.hidden {
 #custom-swaync,
 #keyboard-state,
 #power,
-#network,
 #custom-power,
 #custom-yubikey,
 #custom-updates,
-#custom-wireguard,
 #clock {
 	font-family: JetBrainsMono Nerd Font Propo;
 	font-size: 18px;
@@ -278,12 +276,4 @@ window#waybar.hidden {
 
 #custom-usbguard {
 	color: #1d81b4;
-}
-
-#custom-wireguard {
-	color: #ffffff;
-}
-
-#network {
-	color:#ebe284;
 }

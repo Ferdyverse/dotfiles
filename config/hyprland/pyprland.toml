@@ -7,6 +7,6 @@ plugins = [
 
 [scratchpads.term]
 animation = "fromTop"
-command = "ghostty --class wezterm-dropterm"
+command = "wezterm start --class wezterm-dropterm"
 class = "wezterm-dropterm"
 size = "50% 50%"
