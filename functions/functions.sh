@@ -300,7 +300,7 @@ install_package() {
     case "$BASE_DISTRO" in
     debian) cmd="sudo apt-get install -qq -y $package" ;;
     fedora) cmd="sudo dnf install -y $package" ;;
-    arch) cmd="sudo pacman -Syu --noconfirm $package" ;;
+    arch) cmd="sudo pacman -Syu -q --noconfirm $package" ;;
     *)
         log "ERROR" "Unsupported distribution: $BASE_DISTRO"
         return 1

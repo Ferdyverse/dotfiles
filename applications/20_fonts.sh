@@ -37,6 +37,7 @@ if [ "$BASE_DISTRO" = "fedora" ]; then
 fi
 
 # jetbrains nerd font. Necessary for waybar
+log "INFO" "Downloading JetBrains Font"
 DOWNLOAD_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz"
 # Maximum number of download attempts
 MAX_ATTEMPTS=2
@@ -64,3 +65,6 @@ fi
 if ! command -v fc-cache &>/dev/null; then
     is_package_installed "fontconfig" || install_package "fontconfig"
 fi
+
+log "INFO" "Updating font cache"
+fc-cache
