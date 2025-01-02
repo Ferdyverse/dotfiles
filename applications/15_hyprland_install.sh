@@ -95,10 +95,11 @@ fi
 
 log "INFO" "Starting SDDM config"
 ensure_directories "/usr/share/sddm/themes/"
+ensure_directories "$sddm_conf_dir"
 
-if ![ -d "/usr/share/sddm/themes/simple-sddm-2" ]; then
+if [ ! -d "/usr/share/sddm/themes/simple-sddm-2" ]; then
     clone_repository "https://github.com/JaKooLit/simple-sddm-2.git" "$HOME/.dotfiles/repos/simple-sddm-2"
-    sudo mv -f "$HOME/.dotfiles/repos/simple-sddm-2" "/usr/share/sddm/themes/"
+    sudo mv "$HOME/.dotfiles/repos/simple-sddm-2" "/usr/share/sddm/themes/"
 fi
 
 if [ -d "/usr/share/sddm/themes/simple-sddm-2" ]; then
@@ -132,3 +133,10 @@ create_symlink "$SCRIPT_DIR/config/waybar" "$HOME/.config/waybar"
 
 # You need to be in the input group to be able to access the keyboard state
 sudo usermod -aG input $USER
+
+# Link hostfile config
+if [ ! -f "$SCRIPT_DIR/config/hyprland/configs/hosts/$HOSTNAME.conf" ]; then
+    touch "$SCRIPT_DIR/config/hyprland/configs/hosts/$HOSTNAME.conf"
+fi
+
+create_symlink "$SCRIPT_DIR/config/hyprland/configs/hosts/$HOSTNAME.conf" "$HOME/.config/hypr/configs/current_host.conf"
