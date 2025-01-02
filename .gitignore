@@ -1,0 +1,27 @@
+# Ignore everything in the /repos directory
+repos/*
+
+# Except for .gitkeep
+!repos/.gitkeep
+
+# Exclude
+lazy-lock.json
+JetBrainsMono.tar.xz
+
+# No variety logs
+**/variety/.last_change_time
+**/variety/history.txt
+**/variety/Downloaded
+**/variety/Fetched
+**/variety/wallpaper
+**/variety.log
+
+# Wallpaper & Color changes
+.current_wallpaper
+.wallpaper_current
+colors-rofi.rasi
+wallust-hyprland.conf
+colors-waybar.css
+
+
+!**/.gitkeep
