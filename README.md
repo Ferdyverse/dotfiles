@@ -52,19 +52,21 @@ To extend the functionality of the bootstrap process, you can add custom scripts
 ### Directory Structure
 The bootstrap script organizes custom scripts into specific directories based on their purpose:
 
-- **Universal Scripts:** `~/.dotfiles/applications/all/`
-- **Distribution-Specific Scripts:**
-  - Arch Linux: `~/.dotfiles/applications/arch/`
-  - Debian/Ubuntu: `~/.dotfiles/applications/deb/`
-- **WSL-Specific Scripts:** `~/.dotfiles/applications/wsl/`
-- **GNOME-Specific Scripts:** `~/.dotfiles/applications/gnome/`
+- **Universal Scripts:** `~/.dotfiles/applications/`
 
 Place your custom `.sh` scripts in the appropriate directory based on where they should be executed.
 
 ### Naming Convention
 To control the execution order and behavior of your scripts, adhere to the following naming conventions:
 
-- **Prefix with Numbers:** Prefix your script filenames with numbers to define the order in which they should run. For example, `01_install_vim.sh`, `02_setup_git.sh`, etc.
+- **Prefix with Numbers:** Prefix your script filenames with numbers to define the order in which they should run. For example, `00_basic_all.sh`, `05_basic_arch.sh`, etc.
+
+   - **00**: Scripts for all distributions
+   - **05**: Dist specific scripts
+   - **10**: Things without a gui
+   - **15**: Special things like Hyprland
+   - **20**: Things with gui
+   - **50**: Scripts that will be asked
 
 - **Script Description:** Optionally, include a brief description after the numbering for clarity. For example, `50_customize_shell.sh`.
 
