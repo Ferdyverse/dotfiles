@@ -172,6 +172,15 @@ run_scripts_in_directory() {
                 else
                     log "INFO" "Skipping $script"
                 fi
+            elif ((prefix >= 20 && prefix < 30)); then
+                # We run this scripts here only when there is a "GUI"
+                if [[ $RUNNING_GNOME || $RUNNING_HYPRLAND ]]; then
+                    log "INFO" "Running $script_name"
+                    if ! source "$script"; then
+                        log "ERROR" "Error occurred while running $script"
+                        return 1
+                    fi
+                fi
             elif ((prefix >= 50 && prefix < 90)); then
                 # Prepare message for whiptail
                 message=$(printf "Script: %s\n\nDescription:\n%s" "$script_name" "$description")
