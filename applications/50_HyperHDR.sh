@@ -1,6 +1,6 @@
 # HyperHDR is used for my monitor ambient lights
 if $RUNNING_GNOME; then
-    if [ "$BASE_DISTRO" = "debian" ]; then
+    if $DEBIAN; then
         if ! is_package_installed "hyperhdr"; then
             cd /tmp
             wget -qO- https://awawa-dev.github.io/hyperhdr.public.apt.gpg.key | gpg --dearmor >hyperhdr.public.apt.gpg.key

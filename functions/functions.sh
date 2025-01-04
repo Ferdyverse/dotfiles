@@ -285,24 +285,6 @@ check_online() {
     fi
 }
 
-get_base_distro() {
-    case "$DISTRO" in
-    arch | manjaro | endeavouros)
-        echo "arch"
-        ;;
-    ubuntu | debian)
-        echo "debian"
-        ;;
-    fedora)
-        echo "fedora"
-        ;;
-    *)
-        log "WARNING" "No base setting found for $DISTRO"
-        exit 1
-        ;;
-    esac
-}
-
 # Installation function based on distribution
 install_package() {
     local package="$1"

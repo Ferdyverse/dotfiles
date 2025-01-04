@@ -6,7 +6,7 @@ if $RUNNING_GNOME; then
         fi
     fi
 
-    if [ "$BASE_DISTRO" = "debian" ]; then
+    if $DEBIAN; then
         if ! is_package_installed "ulauncher"; then
             sudo add-apt-repository universe -y
             sudo add-apt-repository ppa:agornostal/ulauncher -y

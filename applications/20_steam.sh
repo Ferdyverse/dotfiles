@@ -1,4 +1,4 @@
-if [ "$BASE_DISTRO" = "debian" ]; then
+if $DEBIAN; then
     if ! is_package_installed "steam-launcher"; then
         cd /tmp
         wget http://media.steampowered.com/client/installer/steam.deb
@@ -10,13 +10,13 @@ if [ "$BASE_DISTRO" = "debian" ]; then
     fi
 fi
 
-if [ "$BASE_DISTRO" = "fedora" ]; then
+if $FEDORA; then
     if ! is_package_installed "steam"; then
         install_package steam
     fi
 fi
 
-if [ "$BASE_DISTRO" = "arch" ]; then
+if $ARCH; then
     if ! is_package_installed "steam"; then
         install_package steam
     fi

@@ -1,4 +1,4 @@
-if [ "$BASE_DISTRO" = "arch" ]; then
+if $ARCH; then
     if ! is_package_installed "ghostty"; then
         install_package ghostty
         install_package ttf-nerd-fonts-symbols-mono

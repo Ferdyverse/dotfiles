@@ -1,4 +1,4 @@
-if [ "$BASE_DISTRO" = "debian" ]; then
+if $DEBIAN; then
     if ! is_package_installed "1password"; then
         log "INFO" "Updating apt repos"
         curl -sS https://downloads.1password.com/linux/keys/1password.asc |
@@ -24,7 +24,7 @@ if [ "$BASE_DISTRO" = "debian" ]; then
     fi
 fi
 
-if [ "$BASE_DISTRO" = "fedora" ]; then
+if $FEDORA; then
     if ! is_package_installed "1password"; then
         sudo rpm --import https://downloads.1password.com/linux/keys/1password.asc
         sudo sh -c 'echo -e "[1password]\nname=1Password Stable Channel\nbaseurl=https://downloads.1password.com/linux/rpm/stable/\$basearch\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=\"https://downloads.1password.com/linux/keys/1password.asc\"" > /etc/yum.repos.d/1password.repo'
@@ -32,7 +32,7 @@ if [ "$BASE_DISTRO" = "fedora" ]; then
     fi
 fi
 
-if [ "$BASE_DISTRO" = "arch" ]; then
+if $ARCH; then
     if ! is_package_installed "1password"; then
         install_package 1password
     fi

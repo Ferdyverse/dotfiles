@@ -1,4 +1,4 @@
-if [ "$BASE_DISTRO" = "debian" ]; then
+if $DEBIAN; then
     if ! is_package_installed "gh"; then
         curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg &&
             sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg &&

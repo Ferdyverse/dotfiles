@@ -21,7 +21,22 @@ DISTRO=$(source /etc/os-release 2>/dev/null && echo $ID || {
     exit 1
 })
 
-BASE_DISTRO=$(get_base_distro)
+# Define BASE system
+ARCH=$([[ "$DISTRO" =~ ^(arch|manjaro|endeavouros|arcolinux|garuda) ]] && echo true || echo false)
+DEBIAN=$([[ "$DISTRO" =~ ^(ubuntu|debian|mint|pop!_os|kali|zorin|elementary|mx|linuxlite|lubuntu|xubuntu) ]] && echo true || echo false)
+FEDORA=$([[ "$DISTRO" =~ ^(fedora|rhel|centos|rocky|almalinux) ]] && echo true || echo false)
+
+# Set BASE_DISTRO based on the first matching condition
+if [ "$ARCH" == "true" ]; then
+    BASE_DISTRO="arch"
+elif [ "$DEBIAN" == "true" ]; then
+    BASE_DISTRO="debian"
+elif [ "$FEDORA" == "true" ]; then
+    BASE_DISTRO="fedora"
+else
+    log "ERROR" "No matching distro found"
+    exit 1
+fi
 
 IS_WSL=$(grep -qiE "(Microsoft|WSL)" /proc/version && echo true || echo false)
 RUNNING_GNOME=$([[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]] && echo true || echo false)

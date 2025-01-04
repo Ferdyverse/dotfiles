@@ -67,7 +67,7 @@ sddm_conf_dir=/etc/sddm.conf.d
 
 create_symlink "$SCRIPT_DIR/config/hyprland" "$HOME/.config/hypr"
 
-if [ "$BASE_DISTRO" = "fedora" ]; then
+if $FEDORA; then
     for pkg in "${copr_pkgs[@]}"; do
         sudo dnf copr enable -y "$pkg"
     done
@@ -81,7 +81,7 @@ if [ "$BASE_DISTRO" = "fedora" ]; then
     done
 fi
 
-if [ "$BASE_DISTRO" = "arch" ]; then
+if $ARCH; then
     for package in "${packages_arch[@]}"; do
         if ! is_package_installed "$package"; then
             install_package "$package"

@@ -1,5 +1,5 @@
 # NVIDIA settings
-if [ "$BASE_DISTRO" = "arch" ]; then
+if $ARCH; then
     packages=(
         nvidia-dkms
         nvidia-utils
@@ -21,7 +21,7 @@ if [ "$BASE_DISTRO" = "arch" ]; then
     sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 
-if [ "$BASE_DISTRO" = "fedora" ]; then
+if $FEDORA; then
     nvidia_pkg=(
         akmod-nvidia
         xorg-x11-drv-nvidia-cuda

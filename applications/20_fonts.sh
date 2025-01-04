@@ -15,7 +15,7 @@ for f in $SCRIPT_FONT_DIR/*.otf; do
     cp "$f" "$SYSTEM_FONT_DIR"
 done
 
-if [ "$BASE_DISTRO" = "fedora" ]; then
+if $FEDORA; then
     fonts=(
         adobe-source-code-pro-fonts
         fira-code-fonts

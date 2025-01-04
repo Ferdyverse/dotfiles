@@ -1,4 +1,4 @@
-if [ "$BASE_DISTRO" = "fedora" ]; then
+if $FEDORA; then
     if ! is_package_installed "onedrive"; then
         install_package onedrive
     fi

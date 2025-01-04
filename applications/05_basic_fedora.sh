@@ -1,4 +1,4 @@
-if [ "$BASE_DISTRO" = "fedora" ]; then
+if $FEDORA; then
 
     packages=(
         whiptail

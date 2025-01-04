@@ -1,4 +1,4 @@
-if [ "$BASE_DISTRO" = "debian" ]; then
+if $DEBIAN; then
 
     packages=(
         pipx

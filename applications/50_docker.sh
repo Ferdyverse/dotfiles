@@ -1,5 +1,5 @@
 # Docker Install
-if [ "$BASE_DISTRO" = "arch" ]; then
+if $ARCH; then
     if ! is_package_installed "docker"; then
         install_package docker
     fi
@@ -13,7 +13,7 @@ if [ "$BASE_DISTRO" = "arch" ]; then
     fi
 fi
 
-if [ "$BASE_DISTRO" = "debian" ]; then
+if $DEBIAN; then
     if ! is_package_installed "docker-ce"; then
         for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do
             sudo apt-get remove -qq -y $pkg
@@ -42,7 +42,7 @@ if [ "$BASE_DISTRO" = "debian" ]; then
     fi
 fi
 
-if [ "$BASE_DISTRO" = "fedora" ]; then
+if $FEDORA; then
     docker_pkg=(
         docker-ce
         docker-ce-cli

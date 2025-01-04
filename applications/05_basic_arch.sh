@@ -1,4 +1,4 @@
-if [ "$BASE_DISTRO" = "arch" ]; then
+if $ARCH; then
 
     packages=(
         noto-fonts-emoji
