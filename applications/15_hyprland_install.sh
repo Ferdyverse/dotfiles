@@ -32,7 +32,6 @@ packages_arch=(
     waybar
     rofi-wayland
     swaync
-    hyprpaper
     hyprlock
     hypridle
     xdg-desktop-portal-hyprland
@@ -40,6 +39,7 @@ packages_arch=(
     kitty
     qt5-wayland
     qt6-wayland
+    qt5-graphicaleffects
     cliphist
     thunar
     thunar-volman
@@ -58,7 +58,9 @@ packages_arch=(
 
 packages_yay=(
     swww-git
+    pyprland
     wallust
+    wlr-layout-ui
 )
 
 sddm_conf_dir=/etc/sddm.conf.d
