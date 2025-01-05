@@ -1,7 +1,5 @@
 if $FEDORA; then
-    if ! is_package_installed "onedrive"; then
-        install_package onedrive
-    fi
+    is_package_installed "onedrive" || install_package onedrive
 fi
 
 ensure_directories "$HOME/.config/onedrive"

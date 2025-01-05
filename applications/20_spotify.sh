@@ -1,7 +1,5 @@
 if $ARCH; then
-    if ! is_package_installed "spotify-launcher"; then
-        install_package "spotify-launcher"
-    fi
+    is_package_installed "spotify-launcher" || install_package "spotify-launcher"
 fi
 
 if $DEBIAN; then

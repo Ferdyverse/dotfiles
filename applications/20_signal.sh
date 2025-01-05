@@ -11,7 +11,5 @@ if $DEBIAN; then
 fi
 
 if $ARCH; then
-    if ! is_package_installed "signal-desktop"; then
-        install_package signal-desktop
-    fi
+    is_package_installed "signal-desktop" || install_package signal-desktop
 fi

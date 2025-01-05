@@ -75,23 +75,17 @@ if $FEDORA; then
     dnf check-update
 
     for package in "${packages_fedora[@]}"; do
-        if ! is_package_installed "$package"; then
-            install_package "$package"
-        fi
+        is_package_installed "$package" || install_package "$package"
     done
 fi
 
 if $ARCH; then
     for package in "${packages_arch[@]}"; do
-        if ! is_package_installed "$package"; then
-            install_package "$package"
-        fi
+        is_package_installed "$package" || install_package "$package"
     done
 
     for package in "${packages_yay[@]}"; do
-        if ! is_package_installed "$package"; then
-            install_yay "$package"
-        fi
+        is_package_installed "$package" || install_yay "$package"
     done
 fi
 

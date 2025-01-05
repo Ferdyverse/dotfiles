@@ -6,7 +6,5 @@ if $FEDORA; then
 fi
 
 if $ARCH; then
-    if ! is_package_installed "lazygit"; then
-        install_package lazygit
-    fi
+    is_package_installed "lazygit" || install_package lazygit
 fi

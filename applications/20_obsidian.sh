@@ -1,7 +1,5 @@
 if $ARCH; then
-    if ! is_package_installed "obsidian"; then
-        install_package obsidian
-    fi
+    is_package_installed "obsidian" || install_package obsidian
 fi
 
 if $DEBIAN; then

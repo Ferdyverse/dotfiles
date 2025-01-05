@@ -4,7 +4,5 @@ if ! is_package_installed "flatpak"; then
 fi
 
 if $DEBIAN; then
-    if ! is_package_installed "gnome-software-plugin-flatpak"; then
-        install_package gnome-software-plugin-flatpak
-    fi
+    is_package_installed "gnome-software-plugin-flatpak" || install_package gnome-software-plugin-flatpak
 fi

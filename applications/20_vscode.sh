@@ -8,9 +8,7 @@ if $FEDORA; then
 fi
 
 if $ARCH; then
-    if ! is_package_installed "code"; then
-        install_yay visual-studio-code-bin
-    fi
+    is_package_installed "code" || install_yay visual-studio-code-bin
 fi
 
 if $DEBIAN; then

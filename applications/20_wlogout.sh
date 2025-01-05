@@ -1,7 +1,5 @@
 if $RUNNING_HYPRLAND; then
-    if ! is_package_installed "wlogout"; then
-        install_package wlogout
-    fi
+    is_package_installed "wlogout" || install_package wlogout
 
     create_symlink "$SCRIPT_DIR/config/wlogout" "$HOME/.config/wlogout"
 fi

@@ -1,16 +1,10 @@
 # Docker Install
 if $ARCH; then
-    if ! is_package_installed "docker"; then
-        install_package docker
-    fi
+    is_package_installed "docker" || install_package docker
 
-    if ! is_package_installed "docker-compose"; then
-        install_package docker-compose
-    fi
+    is_package_installed "docker-compose" || install_package docker-compose
 
-    if ! is_package_installed "lazydocker"; then
-        install_package lazydocker
-    fi
+    is_package_installed "lazydocker" || install_package lazydocker
 fi
 
 if $DEBIAN; then

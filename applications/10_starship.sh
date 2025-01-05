@@ -6,7 +6,5 @@ if $FEDORA; then
 fi
 
 if $ARCH; then
-    if ! is_package_installed "starship"; then
-        install_package starship
-    fi
+    is_package_installed "starship" || install_package starship
 fi

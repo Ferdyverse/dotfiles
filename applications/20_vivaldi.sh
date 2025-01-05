@@ -9,7 +9,5 @@ if $DEBIAN; then
 fi
 
 if $ARCH; then
-    if ! is_package_installed "vivaldi"; then
-        install_package vivaldi
-    fi
+    is_package_installed "vivaldi" || install_package vivaldi
 fi

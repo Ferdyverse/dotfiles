@@ -1,5 +1,3 @@
 if [[ "$BASE_DISTRO" =~ ^(fedora|arch) ]]; then
-    if ! is_package_installed "thunderbird"; then
-        install_package thunderbird
-    fi
+    is_package_installed "thunderbird" || install_package thunderbird
 fi

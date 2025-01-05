@@ -33,7 +33,5 @@ if $FEDORA; then
 fi
 
 if $ARCH; then
-    if ! is_package_installed "1password"; then
-        install_package 1password
-    fi
+    is_package_installed "1password" || install_package 1password
 fi

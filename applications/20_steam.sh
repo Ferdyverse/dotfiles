@@ -11,13 +11,9 @@ if $DEBIAN; then
 fi
 
 if $FEDORA; then
-    if ! is_package_installed "steam"; then
-        install_package steam
-    fi
+    is_package_installed "steam" || install_package steam
 fi
 
 if $ARCH; then
-    if ! is_package_installed "steam"; then
-        install_package steam
-    fi
+    is_package_installed "steam" || install_package steam
 fi
