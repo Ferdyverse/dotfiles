@@ -25,6 +25,9 @@ packages_fedora=(
     grim
     slurp
     thunar
+    qt6-5compat
+    qt6-declarative
+    qt6-qtsvg
 )
 
 packages_arch=(
@@ -39,7 +42,9 @@ packages_arch=(
     kitty
     qt5-wayland
     qt6-wayland
-    qt5-graphicaleffects
+    qt6-5compat
+    qt6-declarative
+    qt6-svg
     cliphist
     thunar
     thunar-volman

@@ -7,33 +7,25 @@ show)
     if [ -f "$cache_path" ]; then
         cat "$cache_path"
     else
-        printf '{"text": "-"}\n'
+        printf '{"text": "waybar-updates cache is missing"}\n'
     fi
     ;;
 refresh)
     pac="$(checkupdates)"
-    aur="$(aur repo -u)"
-    vcs="$(aur vercmp-devel)"
-    off="$(checkofficial)"
+    aur="$(yay -Qua)"                    # List AUR updates with yay
+    vcs="$(yay -Qm | grep -E '\[VCS\]')" # Filter VCS packages using yay
     dif="$(pacdiff -o)"
-    reb="$(checkrebuild)"
-    rep="$(repoctl status | grep -v 'On repo' | grep -v '^$' | grep -v 'Everything up-to-date' | sed 's/^\s*//g')"
+    reb="$(checkrebuild 2>/dev/null)"
 
     pac_n=$(printf "$pac" | grep -c '^')
     aur_n=$(printf "$aur" | grep -c '^')
     vcs_n=$(printf "$vcs" | grep -c '^')
-    off_n=$(printf "$off" | grep -c '^')
     dif_n=$(printf "$dif" | grep -c '^')
     reb_n=$(printf "$reb" | grep -c '^')
-    rep_n=$(printf "$rep" | grep -c '^')
 
     text=""
     tooltip=""
 
-    [ -n "$text" -o -n "$rep" ] && text="/${rep_n}${text}"
-    [ -n "$rep" ] && tooltip="AUR repo needs cleaning:\n\n$rep\n\n${tooltip}"
-    [ -n "$text" -o -n "$off" ] && text="/${off_n}${text}"
-    [ -n "$off" ] && tooltip="Became official:\n\n$off\n\n${tooltip}"
     [ -n "$text" -o -n "$reb" ] && text="/${reb_n}${text}"
     [ -n "$reb" ] && tooltip="Rebuild required:\n\n$reb\n\n${tooltip}"
     [ -n "$text" -o -n "$dif" ] && text="/${dif_n}${text}"
@@ -48,9 +40,9 @@ refresh)
     tooltip="$(printf "$tooltip" | perl -pe 's/\n/\\n/g' | perl -pe 's/(?:\\n)+$//')"
 
     if [ -z "$text" ]; then
-        printf '{"text": "0"}\n' >"$cache_path"
+        printf '{"text": ""}\n' >"$cache_path"
     else
-        printf '{"text": "%s", "tooltip": "%s", "alt": "icon" }\n' "$text" "$tooltip" >"$cache_path"
+        printf "{\"text\": \"%s \", \"tooltip\": \"%s\" }\n" "$text" "$tooltip" >"$cache_path"
     fi
 
     pkill -RTMIN+1 -x waybar
