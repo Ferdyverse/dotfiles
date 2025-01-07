@@ -83,6 +83,8 @@ done
 # Main process
 main() {
     log "INFO" "Starting bootstrap process for $DISTRO ($BASE_DISTRO)"
+    log "INFO" "Running Gnome: $RUNNING_GNOME"
+    log "INFO" "Running Hyprland: $RUNNING_HYPRLAND"
 
     # Are we online
     check_online
