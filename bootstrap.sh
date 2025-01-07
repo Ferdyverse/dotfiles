@@ -39,8 +39,8 @@ else
 fi
 
 IS_WSL=$(grep -qiE "(Microsoft|WSL)" /proc/version && echo true || echo false)
-RUNNING_GNOME=$([[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]] && echo true || echo false)
-RUNNING_HYPRLAND=$([[ "$XDG_CURRENT_DESKTOP" == *"Hyprland"* ]] && echo true || echo false)
+RUNNING_GNOME=$(is_running_desktop "GNOME")
+RUNNING_HYPRLAND=$(is_running_desktop "Hyprland")
 SHOW_DEBUG=false
 
 # Set the IS_ONLINE variable (true to check for internet, false to skip)

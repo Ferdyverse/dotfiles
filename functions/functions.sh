@@ -3,6 +3,11 @@ has_sudo_access() {
     sudo -v && return 0 || return 1
 }
 
+# Searching for a Desktop env
+is_running_desktop() {
+    [[ "$XDG_CURRENT_DESKTOP" == *"$1"* ]] && echo true || echo false
+}
+
 # Function to execute command with or without sudo
 retry_with_sudo() {
     local cmd="$1"
@@ -174,7 +179,7 @@ run_scripts_in_directory() {
                 fi
             elif ((prefix >= 20 && prefix < 30)); then
                 # We run this scripts here only when there is a "GUI"
-                if [[ $RUNNING_GNOME || $RUNNING_HYPRLAND ]]; then
+                if [[ "$RUNNING_GNOME" == "true" || "$RUNNING_HYPRLAND" == "true" ]]; then
                     log "INFO" "Running $script_name"
                     if ! source "$script"; then
                         log "ERROR" "Error occurred while running $script"
@@ -290,8 +295,8 @@ install_package() {
     local package="$1"
     case "$BASE_DISTRO" in
     debian) cmd="sudo apt-get install -qq -y $package" ;;
-    fedora) cmd="sudo dnf install -y $package" ;;
-    arch) cmd="sudo pacman -Syu -q --noconfirm $package" ;;
+    fedora) cmd="sudo dnf install -q -y $package" ;;
+    arch) cmd="sudo pacman -Syu -q --noprogressbar --noconfirm $package" ;;
     *)
         log "ERROR" "Unsupported distribution: $BASE_DISTRO"
         return 1
@@ -304,7 +309,7 @@ install_package() {
 # Installation function based on distribution
 install_yay() {
     local package="$1"
-    cmd="yay -Syu --noconfirm $package"
+    cmd="yay -Syu -q --noprogressbar --noconfirm $package"
     eval "$cmd" && log "SUCCESS" "$package installed" || log "ERROR" "Failed to install $package"
 }
 
@@ -373,26 +378,6 @@ is_package_installed() {
     done
 
     log "INFO" "Package '$package' is not installed"
-    return 1
-}
-
-# Do we need to reboot?
-check_reboot_needed() {
-    # Check for systemd reboot required flag
-    if [ -f /run/reboot-required ]; then
-        log "WARNING" "Reboot required: /run/reboot-required exists"
-        reboot_prompt "System update requires a reboot to complete."
-        return 0
-    fi
-
-    # Check if there's a need to reboot based on package manager status
-    if [ -f /var/run/reboot-required ]; then
-        log "WARNING" "Reboot required: /var/run/reboot-required exists"
-        reboot_prompt "System update requires a reboot to complete."
-        return 0
-    fi
-
-    log "INFO" "No reboot required or could not determine"
     return 1
 }
 
