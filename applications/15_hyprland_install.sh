@@ -141,3 +141,5 @@ if [ ! -f "$SCRIPT_DIR/config/hyprland/configs/hosts/$HOSTNAME.conf" ]; then
 fi
 
 create_symlink "$SCRIPT_DIR/config/hyprland/configs/hosts/$HOSTNAME.conf" "$HOME/.config/hypr/configs/current_host.conf"
+
+create_symlink "$SCRIPT_DIR/config/hyprland/scripts/clipboard_sync.sh" "$HOME/.local/bin/clipsync"
