@@ -13,7 +13,7 @@
 	pom = push origin master
 	acp = "!f() { git add -A && git commit -m \"$@\" && git push; }; f"
 [user]
-	name = Brazier85
+	name = Ferdyversee
 	email = github@berger-em.de
 [core]
 	hooksPath = ~/.config/git/hooks

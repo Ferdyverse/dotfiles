@@ -1,4 +1,4 @@
+local_first = "true"
 sync_root_files = "true"
-resync = "true"
 skip_file = "~*|.~*|*.tmp"
 
