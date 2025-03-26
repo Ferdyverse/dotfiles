@@ -79,6 +79,9 @@ if [[ "$DE" == "hyprland" ]]; then
 
     swww query || swww-daemon --format xrgb && swww img ${WP} $SWWW_PARAMS
 
+    # Copy Wallpaper to hyprland
+    cp ${WP} "$HOME/.config/hypr/wallpaper_effects/.wallpaper_current"
+
     sleep 1
     ${HYPR_SCRIPTS}/WallustSwww.sh
     sleep 0.5
