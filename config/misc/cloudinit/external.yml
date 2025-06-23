@@ -1,0 +1,58 @@
+#cloud-config
+
+locale: de_DE.UTF-8
+timezone: Europe/Berlin
+package_update: true
+package_upgrade: true
+packages:
+  - vim
+  - git
+  - wget
+  - curl
+  - dnsutils
+  - net-tools
+
+groups:
+  - docker
+
+users:
+  - name: bergefe
+    groups: [sudo, docker]
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    shell: /usr/bin/bash
+    ssh_authorized_keys:
+      - sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIIL03Lo7kDlWej0+CVqoTBu076AlR1+TbKkuKqO7TC43AAAAC3NzaDpIZXR6bmVy
+
+write_files:
+  - path: /etc/sysctl.d/99-forwarding.conf
+    content: |
+      net.ipv4.ip_forward          = 1
+      net.ipv6.conf.all.forwarding = 1
+  - path: /etc/apt/apt.conf.d/50unattended-upgrades
+    content: |
+      Unattended-Upgrade::Allowed-Origins {
+        "${distro_id}:${distro_codename}";
+        "${distro_id}:${distro_codename}-security";
+        "${distro_id}ESMApps:${distro_codename}-apps-security";
+        "${distro_id}ESM:${distro_codename}-infra-security";
+        "${distro_id}:${distro_codename}-updates";
+        "${distro_id}:${distro_codename}-proposed";
+        "${distro_id}:${distro_codename}-backports";
+      };
+
+      Unattended-Upgrade::DevRelease "auto";
+      Unattended-Upgrade::Remove-Unused-Dependencies "true";
+      Unattended-Upgrade::Automatic-Reboot "true";
+      Unattended-Upgrade::Automatic-Reboot-Time "03:00";
+      Unattended-Upgrade::SyslogEnable "true";
+
+runcmd:
+  # Allow ssh and enable the firewall
+  - ufw allow 22/tcp
+  - ufw enable
+  # Enable Forwarding for IPv4 and IPv6
+  - sysctl -p /etc/sysctl.d/99-forwarding.conf
+  # Enable unattended upgrade service
+  - systemctl enable --now unattended-upgrades.service
+  # Disable ssh root login
+  - sed -i -e '/^PermitRootLogin/s/^.*$/PermitRootLogin no/' /etc/ssh/sshd_config

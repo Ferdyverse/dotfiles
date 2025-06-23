@@ -59,6 +59,11 @@ packages_arch=(
     gnome-themes-extra
     gtk-engine-murrine
     nwg-look
+    adw-gtk-theme
+    breeze-icons
+    kvantum
+    qt5ct
+    qt6ct
 )
 
 packages_yay=(
