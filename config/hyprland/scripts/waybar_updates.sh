@@ -14,13 +14,13 @@ refresh)
     pac="$(checkupdates)"
     aur="$(yay -Qua)"                    # List AUR updates with yay
     vcs="$(yay -Qm | grep -E '\[VCS\]')" # Filter VCS packages using yay
-    dif="$(pacdiff -o)"
+    # dif="$(pacdiff -o)"
     reb="$(checkrebuild 2>/dev/null)"
 
     pac_n=$(printf "$pac" | grep -c '^')
     aur_n=$(printf "$aur" | grep -c '^')
     vcs_n=$(printf "$vcs" | grep -c '^')
-    dif_n=$(printf "$dif" | grep -c '^')
+    # dif_n=$(printf "$dif" | grep -c '^')
     reb_n=$(printf "$reb" | grep -c '^')
 
     text=""
@@ -28,8 +28,8 @@ refresh)
 
     [ -n "$text" -o -n "$reb" ] && text="/${reb_n}${text}"
     [ -n "$reb" ] && tooltip="Rebuild required:\n\n$reb\n\n${tooltip}"
-    [ -n "$text" -o -n "$dif" ] && text="/${dif_n}${text}"
-    [ -n "$dif" ] && tooltip="pacdiff:\n\n$dif\n\n${tooltip}"
+    # [ -n "$text" -o -n "$dif" ] && text="/${dif_n}${text}"
+    # [ -n "$dif" ] && tooltip="pacdiff:\n\n$dif\n\n${tooltip}"
     [ -n "$text" -o -n "$vcs" ] && text="/${vcs_n}${text}"
     [ -n "$vcs" ] && tooltip="VCS:\n\n$vcs\n\n${tooltip}"
     [ -n "$text" -o -n "$aur" ] && text="/${aur_n}${text}"
