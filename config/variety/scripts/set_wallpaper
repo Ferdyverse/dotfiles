@@ -70,15 +70,25 @@ HYPR_SCRIPTS="$HOME/.config/hypr/scripts"
 # Hyprland
 if [[ "$DE" == "hyprland" ]]; then
 
-  # Transition config
-  FPS=60
-  TYPE="random"
-  DURATION=1
-  BEZIER=".43,1.19,1,.4"
-  SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
+  if command -v "swaybg" >/dev/null 2>&1; then
+    # Grey background flicker is prevented by killing old swaybg process after new one.
+    # See https://github.com/swaywm/swaybg/issues/17#issuecomment-851680720
+    PID=$(pidof swaybg)
+    swaybg -i "$WP" -m fill &
+    if [ -n "$PID" ]; then
+      sleep 1
+      kill "$PID" 2>/dev/null
+    fi
+  else
+    # Transition config
+    FPS=60
+    TYPE="random"
+    DURATION=1
+    BEZIER=".43,1.19,1,.4"
+    SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
 
-  swww query || swww-daemon --format xrgb && swww img ${WP} $SWWW_PARAMS
-
+    swww query || swww-daemon --format xrgb && swww img ${WP} $SWWW_PARAMS
+  fi
   # Copy Wallpaper to hyprland
   cp ${WP} "$HOME/.config/hypr/wallpaper_effects/.wallpaper_current"
   cp ${WP} "$HOME/.config/rofi/.current_wallpaper"

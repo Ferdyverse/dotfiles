@@ -6,7 +6,7 @@ local config = wezterm.config_builder()
 local act = wezterm.action
 
 -- Wayland fix --
-config.enable_wayland = false
+-- config.enable_wayland = true
 
 -- Settings based on the PC
 local font_size = 11.0
