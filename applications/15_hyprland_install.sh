@@ -64,7 +64,6 @@ packages_arch=(
   #kvantum
   #qt5ct
   #qt6ct
-  swaylock-effects-git
   libfido2
   udisks2
 )
