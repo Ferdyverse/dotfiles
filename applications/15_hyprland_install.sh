@@ -35,9 +35,9 @@ packages_arch=(
   #waybar
   #rofi-wayland
   #swaync
-  #hyprlock
-  #hypridle
-  #xdg-desktop-portal-hyprland
+  hyprlock
+  hypridle
+  xdg-desktop-portal-hyprland
   #sddm
   kitty
   #qt5-wayland

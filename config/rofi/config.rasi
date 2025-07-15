@@ -105,4 +105,4 @@ configuration {
 }
 
  @import "~/.config/rofi/themes/type73.rasi"
- @import "~/.config/rofi/wallust/colors-rofi.rasi"
+/* @import "~/.config/rofi/wallust/colors-rofi.rasi"*/
