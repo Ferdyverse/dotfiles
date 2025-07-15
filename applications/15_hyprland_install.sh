@@ -66,6 +66,7 @@ packages_arch=(
   #qt6ct
   libfido2
   udisks2
+  yubikey-touch-detector
 )
 
 packages_yay=(
@@ -124,3 +125,6 @@ fi
 create_symlink "$SCRIPT_DIR/config/hyprland/configs/hosts/$HOSTNAME.conf" "$HOME/.config/hypr/configs/current_host.conf"
 
 #create_symlink "$SCRIPT_DIR/config/hyprland/scripts/clipboard_sync.sh" "$HOME/.local/bin/clipsync"
+
+systemctl --user daemon-reload
+systemctl --user enable --now yubikey-touch-detector.service
