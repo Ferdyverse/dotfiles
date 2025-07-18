@@ -25,6 +25,12 @@ config.font = wezterm.font("MonaspiceRn Nerd Font Mono")
 -- Changing the color scheme:
 config.color_scheme = "Dracula"
 
+-- Change inactive pane color
+config.inactive_pane_hsb = {
+	saturation = 1,
+	brightness = 1,
+}
+
 -- Keybindings
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {

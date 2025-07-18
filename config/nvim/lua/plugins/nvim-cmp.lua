@@ -1,6 +1,5 @@
 return {
   "hrsh7th/nvim-cmp",
-  ---@param opts cmp.ConfigSchema
   opts = function(_, opts)
     local has_words_before = function()
       unpack = unpack or table.unpack
