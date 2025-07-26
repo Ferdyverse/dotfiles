@@ -117,7 +117,7 @@ create_symlink "$SCRIPT_DIR/config/waybar" "$HOME/.config/waybar"
 # You need to be in the input group to be able to access the keyboard state
 sudo usermod -aG input $USER
 
-# Link hostfile config
+# Link hostfile config:waybar
 if [ ! -f "$SCRIPT_DIR/config/hyprland/configs/hosts/$HOSTNAME.conf" ]; then
   touch "$SCRIPT_DIR/config/hyprland/configs/hosts/$HOSTNAME.conf"
 fi
@@ -125,6 +125,31 @@ fi
 create_symlink "$SCRIPT_DIR/config/hyprland/configs/hosts/$HOSTNAME.conf" "$HOME/.config/hypr/configs/current_host.conf"
 
 #create_symlink "$SCRIPT_DIR/config/hyprland/scripts/clipboard_sync.sh" "$HOME/.local/bin/clipsync"
+
+# SDDM
+sudo git clone -b master --depth 1 https://github.com/keyitdev/sddm-astronaut-theme.git /usr/share/sddm/themes/sddm-astronaut-theme
+sudo cp -r /usr/share/sddm/themes/sddm-astronaut-theme/Fonts/* /usr/share/fonts/
+
+echo "[Theme]
+Current=sddm-astronaut-theme" | sudo tee /etc/sddm.conf
+
+sudo cat <<EOF | sudo tee /usr/share/sddm/themes/sddm-astronaut-theme/metadata.desktop
+[SddmGreeterTheme]
+Name=sddm-astronaut-theme
+Description=sddm-astronaut-theme
+Author=keyitdev
+Website=https://github.com/Keyitdev/sddm-astronaut-theme
+License=GPL-3.0-or-later
+Type=sddm-theme
+Version=1.3
+ConfigFile=Themes/post-apocalyptic_hacker.conf
+Screenshot=Previews/astronaut.png
+MainScript=Main.qml
+TranslationsDirectory=translations
+Theme-Id=sddm-astronaut-theme
+Theme-API=2.0
+QtVersion=6
+EOF
 
 systemctl --user daemon-reload
 systemctl --user enable --now yubikey-touch-detector.service
