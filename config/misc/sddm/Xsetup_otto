@@ -1,0 +1,6 @@
+#!/bin/sh
+# Xsetup - run as root before the login dialog appears
+
+xrandr --output DP-0 --auto --primary
+xrandr --output HDMI-0 --off
+xrandr --output HDMI-1 --off
