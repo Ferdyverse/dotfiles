@@ -52,8 +52,8 @@ packages_arch=(
   #network-manager-applet
   blueman
   brightnessctl
-  #slurp
-  #grim
+  slurp
+  grim
   #xclip
   #swappy
   #gnome-themes-extra
@@ -125,6 +125,9 @@ fi
 create_symlink "$SCRIPT_DIR/config/hyprland/configs/hosts/$HOSTNAME.conf" "$HOME/.config/hypr/configs/current_host.conf"
 
 #create_symlink "$SCRIPT_DIR/config/hyprland/scripts/clipboard_sync.sh" "$HOME/.local/bin/clipsync"
+
+# Screenshot dir
+ensure_directories "$HOME/Pictures/screenshots/"
 
 # SDDM
 sudo git clone -b master --depth 1 https://github.com/keyitdev/sddm-astronaut-theme.git /usr/share/sddm/themes/sddm-astronaut-theme
