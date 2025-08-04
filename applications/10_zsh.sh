@@ -16,7 +16,7 @@ fi
 
 # Install oh-my-zsh
 if [ ! -d $HOME/.oh-my-zsh ]; then
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+	sh -c "$(curl -fsSLk https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
 create_symlink "$SCRIPT_DIR/config/zsh/zshrc${WORK:+.work}" "$HOME/.zshrc"
