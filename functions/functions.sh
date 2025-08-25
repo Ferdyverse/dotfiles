@@ -186,6 +186,9 @@ run_scripts_in_directory() {
                         return 1
                     fi
                 fi
+            elif ((prefix >= 40 && prefix < 50)); then
+                # We run this scripts only when they are called via --file
+                continue
             elif ((prefix >= 50 && prefix < 90)); then
                 # Prepare message for whiptail
                 message=$(printf "Script: %s\n\nDescription:\n%s" "$script_name" "$description")
