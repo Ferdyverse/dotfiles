@@ -84,7 +84,7 @@ check_reboot_needed() {
     check_systemd_reboot_flag && return 0
     check_dpkg_reboot && return 0
     check_boot_id_change && return 0
-    check_rebootmgr && return 0
+    # check_rebootmgr && return 0
 
     log "INFO" "No reboot required or could not determine."
     return 1

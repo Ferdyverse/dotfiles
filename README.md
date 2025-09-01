@@ -66,6 +66,7 @@ To control the execution order and behavior of your scripts, adhere to the follo
    - **10**: Things without a gui
    - **15**: Special things like Hyprland
    - **20**: Things with gui
+   - **40**: Only executed when called with --file
    - **50**: Scripts that will be asked
 
 - **Script Description:** Optionally, include a brief description after the numbering for clarity. For example, `50_customize_shell.sh`.
