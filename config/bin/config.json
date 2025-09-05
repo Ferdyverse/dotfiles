@@ -10,6 +10,16 @@
             "provider": "github",
             "package_path": "",
             "pinned": false
+        },
+        "/home/bergefe/.local/bin/lazyssh": {
+            "path": "/home/bergefe/.local/bin/lazyssh",
+            "remote_name": "lazyssh",
+            "version": "v0.2.0",
+            "hash": "5bd1d706a66c76e4e4120f9abf670a42d9c932b39f4330faff9ebe533b2cbd99",
+            "url": "https://github.com/Adembc/lazyssh",
+            "provider": "github",
+            "package_path": "lazyssh",
+            "pinned": false
         }
     }
 }
