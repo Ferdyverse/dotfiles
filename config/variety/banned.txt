@@ -16,3 +16,4 @@ https://www.bing.com/search?q=Ardez+Switzerland&form=hpcapt&filters=HpDate%3a%22
 https://www.bing.com/search?q=Thorrablot&form=hpcapt&filters=HpDate%3a%2220250124_0800%22
 https://www.bing.com/search?q=Rovaniemi&form=hpcapt&filters=HpDate%3a%2220241220_0800%22
 https://www.bing.com/search?q=Mestia&form=hpcapt&filters=HpDate%3a%2220250208_0800%22
+https://www.bing.com/search?q=blue+shark&form=hpcapt&filters=HpDate%3a%2220250714_0700%22
