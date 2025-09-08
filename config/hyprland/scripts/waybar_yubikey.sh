@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 socket="${XDG_RUNTIME_DIR:-/run/user/$UID}/yubikey-touch-detector.socket"
 

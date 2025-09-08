@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "Removing files and folders"
 rm -rf config/git/gitconfig.work
@@ -19,7 +19,7 @@ touch config/zsh/zshrc.work
 touch config/hosts/.gitkeep
 
 cat <<EOT >config/zsh/alias
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Alias settings for all systems
 

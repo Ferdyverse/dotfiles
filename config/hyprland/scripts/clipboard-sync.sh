@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 while true; do
     clip=$(wl-paste) && echo -n "$clip" | xclip -selection clipboard

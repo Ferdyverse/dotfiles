@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Custom env variables
 export ELECTRON_OZONE_PLATFORM_HINT=wayland

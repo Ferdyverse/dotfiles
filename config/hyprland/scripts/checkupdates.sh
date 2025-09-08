@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 updates=$(dnf check-update --refresh -yq | tail -n +2 | grep -E 'x86_64|i686|noarch|aarch64' | awk '{print $1,$2}')
 update_count=$(echo "$updates" | grep -v '^$' | wc -l)

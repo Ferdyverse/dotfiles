@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 length=${1:-30}
 generate_length=$((length + 4))

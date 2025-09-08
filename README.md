@@ -77,7 +77,7 @@ Each custom script should follow a consistent structure to ensure compatibility 
 1. **Shebang:** Start with the shebang to specify the script interpreter.
 
    ```bash
-   #!/bin/bash
+   #!/usr/bin/env bash
    ```
 
 2. **Logging:** Use the `log` function to provide informative messages throughout the script. This helps track the script's progress.
@@ -118,7 +118,7 @@ Here is an example script that follows the conventions above to install and conf
 **50_install_tmux.sh**
 
 ```bash
-#!/bin/bash
+#!/usr/bin/env bash
 # Script to install and configure TMUX
 
 log "INFO" "Installing TMUX..."

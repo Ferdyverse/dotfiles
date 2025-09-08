@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Restart waybar when its configuration files change
 
 CONFIG_DIR="$HOME/.config/waybar"

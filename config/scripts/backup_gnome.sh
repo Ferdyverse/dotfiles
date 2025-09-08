@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 DATE=$(date +%Y-%m-%d)
 BACKUP_DIR="$HOME/.dotfiles/config/gnome"

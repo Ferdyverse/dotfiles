@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo Removing module in case it is there and you need a new version ..
 sudo rmmod -v -f v4l2loopback

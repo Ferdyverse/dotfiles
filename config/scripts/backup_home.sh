@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Colors and text formats used in the script
 RED="\e[31m"
@@ -248,7 +248,7 @@ restore_backup() {
 list_backups() {
     smb_mount
     echo -e "${YELLOW}Available backups by host:${RESET}"
-    
+
     # List directories for each host
     for host_dir in "$BACKUP_DEST"/*; do
         if [ -d "$host_dir" ]; then
@@ -256,7 +256,7 @@ list_backups() {
             ls -1 "$host_dir"/*.tgz 2>/dev/null || echo -e "${RED}  No backups found${RESET}"
         fi
     done
-    
+
     smb_mount
 }
 

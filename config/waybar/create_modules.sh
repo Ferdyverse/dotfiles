@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Define the directory where the modules are located
 MODULES_DIR="$HOME/.config/waybar/modules"

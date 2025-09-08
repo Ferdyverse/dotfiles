@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Define the version files
 VERSION_FILES=('version.txt' '.properties.version')

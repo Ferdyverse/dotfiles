@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.py$|\.js$|\.css$|\.html$|\.yml$|\.yaml$|\.json$|\.sh$|\.md$')
 

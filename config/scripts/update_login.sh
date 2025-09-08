@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Colors and text formats
 RED="\e[31m"
@@ -112,7 +112,7 @@ check_command "awk"
 # Function to add U2F Key Mapping
 add_u2f_key() {
   echo -e "${BLUE}Preparing to add U2F key for user $USERNAME...${RESET}"
-  
+
   if [[ -z "$USERNAME" ]]; then
     echo -e "${RED}${BOLD}Error: Username not set. Please use the --username or -u option.${RESET}"
     exit 1
@@ -137,7 +137,7 @@ add_u2f_key() {
   # Ensure sudo is active and generate the U2F mapping
   sudo -v
   echo -e "${LIGHT_BLUE}Enter PIN if required, then press the button on the device.${RESET}"
-  
+
   # Write the U2F mapping to the file
   pamu2fcfg -u "$USERNAME" >> /etc/u2f_mappings
 

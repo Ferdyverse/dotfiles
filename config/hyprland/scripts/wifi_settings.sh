@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Fetch available networks
 networks=$(nmcli -t -f SSID,SECURITY dev wifi | awk -F: '{ if ($1 != "") print $1 " (" $2 ")"}')

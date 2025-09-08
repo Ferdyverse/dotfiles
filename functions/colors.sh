@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Define colors
 export GREEN='\033[0;32m'        # Success messages

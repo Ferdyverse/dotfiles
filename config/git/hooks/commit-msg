@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Define path to custom hooks directory in your HOME
 CUSTOM_HOOKS_DIR="$HOME/.config/git/hooks/scripts"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "Total space occupied by /var/log: "
 du -sh /var/log
