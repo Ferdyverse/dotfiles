@@ -14,10 +14,10 @@
         "/home/w0111065/.local/bin/lazyssh": {
             "path": "/home/w0111065/.local/bin/lazyssh",
             "remote_name": "lazyssh",
-            "version": "v0.2.0",
-            "hash": "5bd1d706a66c76e4e4120f9abf670a42d9c932b39f4330faff9ebe533b2cbd99",
-            "url": "https://github.com/Adembc/lazyssh",
-            "provider": "github",
+            "version": "v0.2.1",
+            "hash": "b91489cd3b7e71091b4236ed8bda5bf70ff05af223994a97642d2cb11f6822ae",
+            "url": "https://github.com/Adembc/lazyssh/releases/tag/v0.2.1",
+            "provider": "",
             "package_path": "lazyssh",
             "pinned": false
         }
