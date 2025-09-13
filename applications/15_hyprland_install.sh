@@ -11,7 +11,7 @@ packages_fedora=(
   kitty
   hyprlock
   hypridle
-  rofi-wayland
+  rofi
   SwayNotificationCenter
   swww
   pyprland
@@ -33,7 +33,7 @@ packages_fedora=(
 packages_arch=(
   hyprland
   #waybar
-  #rofi-wayland
+  rofi
   #swaync
   hyprlock
   hypridle
@@ -67,6 +67,7 @@ packages_arch=(
   libfido2
   udisks2
   yubikey-touch-detector
+  openbsd-netcat
 )
 
 packages_yay=(
