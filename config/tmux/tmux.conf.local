@@ -304,3 +304,28 @@ bind S setw synchronize-panes
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @resurrect-capture-pane-contents 'on'
 set -g @plugin 'tmux-plugins/tmux-continuum'
+
+# -- Popups --------------------------------
+
+# Lazygit
+bind C-y display-popup \
+  -d "#{pane_current_path}" \
+  -w 80% \
+  -h 80% \
+  -E "lazygit"
+
+# Switch open sessions
+bind C-j display-popup \
+  -E "tmux list-sessions | \
+  sed -E 's/:.*$//' | \
+  grep -v \"^$(tmux display-message -p '#S')\$\" | \
+  fzf --reverse | \
+  xargs tmux switch-client -t"
+
+# Dotfile menu
+bind d display-menu -T "#[align=centre]Dotfiles" -x C -y C \
+  ".zshrc"            z  'display-popup -w 80% -h 80% -E "~/.local/bin/nvim ~/.zshrc" ' \
+  ".tmux.conf"        t  'display-popup -E "~/.local/bin/nvim ~/.tmux.conf.local" ' \
+  ".dotfiles"         d  'display-popup -d '~/.dotfilles' -E "~/.local/bin/nvim ." ' \
+  "" \
+  "Exit"              q  ""
