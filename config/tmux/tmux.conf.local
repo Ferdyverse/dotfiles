@@ -310,7 +310,7 @@ set -g @continuum-restore 'on'
 # -- Popups --------------------------------
 
 # Lazygit
-bind C-y display-popup \
+bind g display-popup \
   -d "#{pane_current_path}" \
   -w 80% \
   -h 80% \
@@ -324,10 +324,14 @@ bind C-j display-popup \
   fzf --reverse | \
   xargs tmux switch-client -t"
 
+# Htop
+bind C-h display-popup -w 80% -h 80% -E "htop"
+
 # Dotfile menu
 bind d display-menu -T "#[align=centre]Dotfiles" -x C -y C \
+  "ssh config"        s  'display-popup -E "~/.local/bin/nvim ~/.ssh/config" ' \
   ".zshrc"            z  'display-popup -w 80% -h 80% -E "~/.local/bin/nvim ~/.zshrc" ' \
   ".tmux.conf"        t  'display-popup -E "~/.local/bin/nvim ~/.tmux.conf.local" ' \
-  ".dotfiles"         d  'display-popup -d '~/.dotfilles' -E "~/.local/bin/nvim ." ' \
+  ".dotfiles"         d  'display-popup -d '~/.dotfiles' -E "~/.local/bin/nvim ." ' \
   "" \
   "Exit"              q  ""
