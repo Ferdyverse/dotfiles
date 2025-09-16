@@ -2,8 +2,8 @@
 # As this package is not installed via a package manager, we need to check if the file exists
 if [ ! -f "$HOME/.local/bin/bin" ]; then
     log "INFO" "Installing Bin package manager"
-    BIN_VERSION=$(curl -s "https://api.github.com/repos/marcosnils/bin/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
-    wget https://github.com/marcosnils/bin/releases/download/v${BIN_VERSION}/bin_${BIN_VERSION}_linux_amd64 -O /tmp/bin
+    LATEST_VERSION=$(get_latest_version "marcosnils" "bin")
+    wget https://github.com/marcosnils/bin/releases/download/v${LATEST_VERSION}/bin_${LATEST_VERSION}_linux_amd64 -O /tmp/bin
     # Bin should install itself
     chmod +x /tmp/bin
     /tmp/bin install github.com/marcosnils/bin

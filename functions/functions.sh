@@ -26,6 +26,35 @@ get_non_root_user() {
     }
 }
 
+get_latest_version() {
+    local user="$1"
+    local repo="$2"
+    local api_url="https://api.github.com/repos/$user/$repo/releases/latest"
+    local response
+    local version
+
+    if [[ -z "$user" || -z "$repo" ]]; then
+        log "ERROR: Missing GitHub user or repository name."
+        return 1
+    fi
+
+    # Fetch release info
+    if ! response=$(curl -fsSL "$api_url"); then
+        echo "ERROR: Failed to fetch release info from $api_url" >&2
+        return 1
+    fi
+
+    # Extract version
+    version=$(echo "$response" | grep -Po '"tag_name": *"v\K[^"]*' || true)
+
+    if [[ -z "$version" ]]; then
+        log "ERROR" "Could not extract version from GitHub API response."
+        return 1
+    fi
+
+    echo "$version"
+}
+
 # Create a symlink
 create_symlink() {
     local target="$1"    # Target of the symlink
