@@ -309,8 +309,6 @@ set -g @continuum-restore 'on'
 
 # -- Popups --------------------------------
 
-set -g @nvim-path "#(command -v nvim || echo ~/.local/bin/nvim)"
-
 # Lazygit
 bind g display-popup \
   -d "#{pane_current_path}" \
