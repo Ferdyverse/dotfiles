@@ -8,6 +8,7 @@ rm -rf config/ssh/*
 rm -rf config/zsh/alias
 rm -rf config/zsh/zshrc.work
 rm -rf config/hosts/*
+rm -rf config/olm/*
 
 echo "Add keep and dummy files"
 touch config/git/gitconfig.work
@@ -112,4 +113,18 @@ NOTIFY=false
 
 # Optional: Number of backups to keep (not used directly in the script, but for reference)
 KEEP_BACKUPS=5
+EOT
+
+cat <<EOT >config/olm/olm.service
+[Unit]
+Description=Olm
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/olm --id 31frd0uzbjvp721 --secret h51mmlknrvrwv8s4r1i210azhumt6isgbpyavxodibx1k2d6 --endpoint https://example.com
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
 EOT

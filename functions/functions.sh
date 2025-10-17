@@ -44,15 +44,22 @@ get_latest_version() {
         return 1
     fi
 
-    # Extract version
+    # Extract version (prefer tags starting with 'v')
     version=$(echo "$response" | grep -Po '"tag_name": *"v\K[^"]*' || true)
+
+    # If not found, fall back to tag_name without assuming a leading "v"
+    if [[ -z "$version" ]]; then
+        version=$(echo "$response" | grep -Po '"tag_name": *"\K[^"]*' || true)
+    fi
 
     if [[ -z "$version" ]]; then
         log "ERROR" "Could not extract version from GitHub API response."
         return 1
     fi
 
+    # Return the version to the caller
     echo "$version"
+    return 0
 }
 
 # Create a symlink
