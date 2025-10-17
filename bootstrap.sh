@@ -41,6 +41,7 @@ fi
 IS_WSL=$(grep -qiE "(Microsoft|WSL)" /proc/version && echo true || echo false)
 RUNNING_GNOME=$(is_running_desktop "GNOME")
 RUNNING_HYPRLAND=$(is_running_desktop "Hyprland")
+RUNNING_KDE=$(is_running_desktop "KDE")
 SHOW_DEBUG=false
 
 # Set the IS_ONLINE variable (true to check for internet, false to skip)
@@ -85,6 +86,7 @@ main() {
   log "INFO" "Starting bootstrap process for $DISTRO ($BASE_DISTRO)"
   log "INFO" "Running Gnome: $RUNNING_GNOME"
   log "INFO" "Running Hyprland: $RUNNING_HYPRLAND"
+  log "INFO" "Running KDE: $RUNNING_KDE"
 
   # Are we online
   check_online

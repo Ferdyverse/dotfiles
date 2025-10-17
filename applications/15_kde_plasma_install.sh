@@ -9,11 +9,7 @@ packages_arch=(
   kde-applications-meta
   cachyos-emerald-kde-theme-git
   qogir-icon-theme
-  sddm
   kitty
-  thunar
-  thunar-volman
-  thunar-archive-plugin
   blueman
   brightnessctl
   slurp

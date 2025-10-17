@@ -11,6 +11,7 @@ if $ARCH; then
         neovim
         lazygit
         libnewt
+		yay
     )
 
     for package in "${packages[@]}"; do

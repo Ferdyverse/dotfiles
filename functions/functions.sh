@@ -208,7 +208,7 @@ run_scripts_in_directory() {
                 fi
             elif ((prefix >= 20 && prefix < 30)); then
                 # We run this scripts here only when there is a "GUI"
-                if [[ "$RUNNING_GNOME" == "true" || "$RUNNING_HYPRLAND" == "true" ]]; then
+                if [[ "$RUNNING_GNOME" == "true" || "$RUNNING_HYPRLAND" == "true" || "$RUNNING_KDE" == "true" ]]; then
                     log "INFO" "Running $script_name"
                     if ! source "$script"; then
                         log "ERROR" "Error occurred while running $script"
