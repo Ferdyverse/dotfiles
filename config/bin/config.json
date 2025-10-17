@@ -14,9 +14,9 @@
         "/home/bergefe/.local/bin/lazyssh": {
             "path": "/home/bergefe/.local/bin/lazyssh",
             "remote_name": "lazyssh",
-            "version": "v0.2.1",
-            "hash": "b91489cd3b7e71091b4236ed8bda5bf70ff05af223994a97642d2cb11f6822ae",
-            "url": "https://github.com/Adembc/lazyssh/releases/tag/v0.2.1",
+            "version": "v0.3.0",
+            "hash": "6f125adf71446879211e912afb43dce6d40d6f388940c266212936750dcb5037",
+            "url": "https://github.com/Adembc/lazyssh/releases/tag/v0.3.0",
             "provider": "",
             "package_path": "lazyssh",
             "pinned": false
