@@ -12,14 +12,33 @@
 
 	pom = push origin master
 	acp = "!f() { git add -A && git commit -m \"$@\" && git push; }; f"
+
 [user]
 	name = Ferdyversee
 	email = github@berger-em.de
+
 [core]
 	hooksPath = ~/.config/git/hooks
-[pull]
-	rebase = false
+
 [http]
 	sslVerify = false
+
 [init]
 	defaultBranch = main
+
+[status]
+  branch = true
+  showStash = true
+  showUntrackedFiles = all
+
+[push]
+  autoSetupRemote = true
+
+[pull]
+  rebase = true
+
+[rebase]
+  autoStash = true
+
+[url "git@github.com:"]
+  insteadof = "gh:"

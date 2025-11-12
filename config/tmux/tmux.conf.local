@@ -274,6 +274,10 @@ tmux_conf_copy_to_os_clipboard=true
 # -- user customizations -------------------------------------------------------
 # this is the place to override or undo settings
 
+# index starts with 1
+set -g base-index 1
+set -g pane-base-index 1
+
 # increase history size
 set -g history-limit 10000
 
@@ -332,6 +336,6 @@ bind d display-menu -T "#[align=centre]Dotfiles" -x C -y C \
   ".zshrc"            z  'display-popup -w 80% -h 80% -E "#(command -v nvim || echo ~/.local/bin/nvim) ~/.zshrc"' \
   ".tmux.conf"        t  'display-popup -w 80% -h 80% -E "#(command -v nvim || echo ~/.local/bin/nvim) ~/.tmux.conf.local"' \
   ".dotfiles dir"     d  'display-popup -d ~/.dotfiles -E "#(command -v nvim || echo ~/.local/bin/nvim) ."' \
-  ".gitconfig"        g  'display-popup -E "#(command -v nvim || echo ~/.local/bin/nvim) ~/.gitconfig"' \
+  ".gitconfig"        g  'display-popup -w 80% -h 80% -E "#(command -v nvim || echo ~/.local/bin/nvim) ~/.gitconfig"' \
   "" \
   "Exit"              q  ""
