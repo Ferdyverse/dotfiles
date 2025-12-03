@@ -17,7 +17,7 @@ install_hyperland:
 
 install_kde:
 	@echo "Running KDE setup"
-	$(BOOTSTRAP) --file applications/15_kde_install.sh
+	$(BOOTSTRAP) --file applications/15_kde_plasma_install.sh
 
 
 help:
