@@ -228,7 +228,7 @@ run_scripts_in_directory() {
             elif ((prefix >= 50 && prefix < 90)); then
                 # Prepare message for whiptail
                 message=$(printf "Script: %s\n\nDescription:\n%s" "$script_name" "$description")
-                if whiptail --title "Source Script" --yes-button "Yes" --no-button "No" --yesno "$message" 15 60; then
+                if whiptail --title "Source Script" --yes-button "Yes" --no-button "No" --yesno --defaultno "$message" 15 60; then
                     log "INFO" "Running $script_name"
                     if ! source "$script"; then
                         log "ERROR" "Error occurred while running $script"
