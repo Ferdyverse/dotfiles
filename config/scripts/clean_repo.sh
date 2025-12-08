@@ -4,6 +4,7 @@ echo "Removing files and folders"
 rm -rf config/git/gitconfig.work
 rm -rf config/gnome/*
 rm -rf config/scripts/backup_script.conf
+rm -rf config/scripts/k8s_config.sh
 rm -rf config/ssh/*
 rm -rf config/zsh/alias
 rm -rf config/zsh/zshrc.work

@@ -20,7 +20,6 @@ if $DEBIAN; then
         # Install 1Password & 1password-cli
         update_cache
         install_package 1password
-        install_package 1password-cli
     fi
 fi
 
