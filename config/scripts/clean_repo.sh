@@ -7,6 +7,8 @@ rm -rf config/scripts/backup_script.conf
 rm -rf config/scripts/k8s_config.sh
 rm -rf config/ssh/*
 rm -rf config/zsh/alias
+rm -rf config/zsh/alias.work
+rm -rf config/zsh/alias.general
 rm -rf config/zsh/zshrc.work
 rm -rf config/hosts/*
 rm -rf config/olm/*
