@@ -3,7 +3,8 @@ is_package_installed "zsh" || install_package "zsh"
 
 ensure_directories "$HOME/.config/"
 
-create_symlink "$SCRIPT_DIR/config/zsh/alias" "$HOME/.alias"
+create_symlink "$SCRIPT_DIR/config/zsh/alias${WORK:+.work}" "$HOME/.alias"
+
 create_symlink "$SCRIPT_DIR/config/zsh/custom_env${WORK:+.work}" "$HOME/.custom_env"
 create_symlink "$SCRIPT_DIR/config/zsh/starship.toml" "$HOME/.config/starship.toml"
 

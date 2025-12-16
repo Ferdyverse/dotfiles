@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+
+# Alias settings for all systems
+
+# Get OS infos
+source /etc/os-release
+
+# Search functions
+search_dir() {
+	fd -i -t d $@ /
+}
+
+search_file() {
+	fd -i -t s $@ /
+}
+
+# Function to load .env files
+load_env() {
+	if [ -f ".env" ]; then
+		export $(echo $(cat .env | sed 's/#.*//g') | xargs | envsubst)
+	else
+		echo "There is no .env file in the current directory!"
+	fi
+}
+
+# Generate ssh key
+gen_ssh() {
+	if [[ -z $1 && -z $2 ]]; then
+		echo "Please define a application-name (\$1) and a comment (\$2) as arguments"
+		echo 'Example: gen_ssh Hetzner "Key for Hetzner Servers"'
+	else
+		ssh-keygen -t ed25519-sk -O resident -O application=ssh:$1 -C $2
+	fi
+}
+
+1pw_login() {
+	eval "$(op completion zsh)"; compdef _op op
+	eval $(op signin)
+}
+
+# Replace ls with exa
+if which eza >/dev/null; then
+	alias ls="eza --icons -algh --group-directories-first"
+fi
+
+if [[ $ID == fedora ]]; then
+	alias apt="dnf"
+else
+	if which nala >/dev/null; then
+		alias apt="nala"
+	fi
+fi
+
+# General linux
+if [[ $OSTYPE == linux* ]]; then
+
+	# cat to batcat
+	if which bat >/dev/null; then
+		alias cat="bat"
+	fi
+
+	# Use the right tool or I force it ;)
+	alias nano="nvim"
+	alias vim="nvim"
+
+	# Lazystuff
+	alias lg="lazygit"
+	alias lssh="lazyssh"
+
+	# Fastfetch
+	alias neofetch="fastfetch"
+
+	# Small convenience settings
+	alias sf="search_file"
+	alias sd="search_dir"
+	alias newkey="gen_ssh"
+	alias env="load_env"
+
+	#1PW
+	alias 1pw="1pw_login"
+
+fi
+
+# For all Systems
+
+# Directories
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
