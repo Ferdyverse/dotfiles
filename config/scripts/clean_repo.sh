@@ -12,6 +12,7 @@ rm -rf config/zsh/alias.general
 rm -rf config/zsh/zshrc.work
 rm -rf config/hosts/*
 rm -rf config/olm/*
+rm -rf config/kde/*
 
 echo "Add keep and dummy files"
 touch config/git/gitconfig.work
@@ -21,6 +22,7 @@ touch config/ssh/config.work
 touch config/zsh/alias
 touch config/zsh/zshrc.work
 touch config/hosts/.gitkeep
+touch config/kde/.gitkeep
 
 cat <<EOT >config/zsh/alias
 #!/usr/bin/env bash

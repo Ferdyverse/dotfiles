@@ -1,5 +1,42 @@
+# ----------------------------------------------------------------------
+# EXCLUSIONS (ALWAYS PUT THESE FIRST)
+# ----------------------------------------------------------------------
+
+# Exclude temporary folders inside ANY Documents folder (any level)
+!Documents/temp*
+
+# ----------------------------------------------------------------------
+# Modern development / programming exclusions
+# (Common cache/build folders used by many languages & tools)
+# ----------------------------------------------------------------------
+
+# Python virtual environments
+!venv/*
+!.venv/*
+!__pycache__/*
+
+# Node.js / JavaScript build directories
+!node_modules/*
+!.next/*
+
+# Java & Kotlin build caches
+!build/kotlin/*
+!.kotlin/*
+
+# Gradle build system cache
+!.gradle/*
+
+# JetBrains IDE caches
+!.idea/libraries/*
+!.idea/caches/*
+
+# Generic runtime caches
+!.cache/*
+
+# ----------------------------------------------------------------------
+# INCLUSIONS (WHAT YOU *DO* WANT TO SYNC)
+# ----------------------------------------------------------------------
 /Dokumente/*
 /3D Printer/*
 /Ferdyverse/*
-/Orca Slicer/*
 /Podcasts/*

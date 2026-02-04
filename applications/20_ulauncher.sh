@@ -1,7 +1,7 @@
 if $RUNNING_GNOME; then
 
     if [[ "$BASE_DISTRO" =~ ^(fedora|arch) ]]; then
-        is_package_installed "ulauncher" || install_package ulauncher
+        is_package_installed "ulauncher" || install_yay ulauncher
     fi
 
     if $DEBIAN; then

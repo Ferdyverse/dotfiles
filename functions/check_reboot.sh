@@ -1,10 +1,31 @@
 #!/usr/bin/env bash
 
+get_latest_installed_kernel() {
+    local latest_kernel=""
+
+    # Works on Arch and many other distros: one folder per installed kernel.
+    if [ -d /usr/lib/modules ]; then
+        latest_kernel=$(find /usr/lib/modules -mindepth 1 -maxdepth 1 -type d -printf '%f\n' 2>/dev/null | sort -V | tail -n 1)
+    fi
+
+    # Fallback for distros exposing kernel images directly in /boot.
+    if [ -z "$latest_kernel" ] && compgen -G "/boot/vmlinuz-*" >/dev/null; then
+        latest_kernel=$(printf '%s\n' /boot/vmlinuz-* | sed 's#^.*/vmlinuz-##' | sort -V | tail -n 1)
+    fi
+
+    echo "$latest_kernel"
+}
+
 # Check for kernel updates
 check_kernel_update() {
     if ! $IS_WSL; then
         running_kernel=$(uname -r)
-        installed_kernel=$(ls /boot/vmlinuz-* | sort -V | tail -n 1 | sed 's/.*vmlinuz-//')
+        installed_kernel=$(get_latest_installed_kernel)
+
+        if [ -z "$installed_kernel" ]; then
+            log "DEBUG" "Could not determine installed kernel version."
+            return 1
+        fi
 
         if [ "$running_kernel" != "$installed_kernel" ]; then
             log "WARNING" "Reboot required: Kernel mismatch (running: $running_kernel, installed: $installed_kernel)"
@@ -12,6 +33,8 @@ check_kernel_update() {
             return 0
         fi
     fi
+
+    return 1
 }
 
 # Check with needs-restarting (for yum or dnf systems)
@@ -36,24 +59,38 @@ check_systemd_reboot_flag() {
 
 # Check for dpkg/kernel updates (Debian/Ubuntu systems)
 check_dpkg_reboot() {
+    if ! command -v dpkg >/dev/null 2>&1; then
+        return 1
+    fi
+
     if dpkg -l | grep -E '^ii.*linux-image-[0-9]' | grep -q "$(uname -r | sed 's/-[^-]*$//')"; then
         log "WARNING" "Reboot required: New kernel installed but not running."
         reboot_prompt "A reboot is required to load the new kernel."
         return 0
     fi
+
+    return 1
 }
 
 # Check for boot ID changes
 check_boot_id_change() {
     last_boot_id=$(cat /proc/sys/kernel/random/boot_id)
-    saved_boot_id="/var/lib/reboot-check/boot_id"
+    saved_boot_id="$HOME/.local/state/dotfiles/reboot-check/boot_id"
 
-    if [ ! -f "$saved_boot_id" ] || [ "$last_boot_id" != "$(cat $saved_boot_id)" ]; then
-        echo "$last_boot_id" > "$saved_boot_id"
-        log "WARNING" "Reboot might be required: Boot ID has changed."
-        reboot_prompt "Reboot is recommended for recent changes."
-        return 0
+    mkdir -p "$(dirname "$saved_boot_id")"
+
+    if [ ! -f "$saved_boot_id" ]; then
+        echo "$last_boot_id" >"$saved_boot_id"
+        return 1
     fi
+
+    if [ "$last_boot_id" != "$(cat "$saved_boot_id")" ]; then
+        echo "$last_boot_id" >"$saved_boot_id"
+        log "DEBUG" "Boot ID changed since last check."
+        return 1
+    fi
+
+    return 1
 }
 
 # Check with rebootmgrctl (for SUSE or rebootmgr systems)
